@@ -1,5 +1,3 @@
-(%include base: ffi#)
-
 ;; Bindings by Estevo Castro
 
 (c-declare "#include \"SDL.h\"")
