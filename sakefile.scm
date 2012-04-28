@@ -1,4 +1,3 @@
-(##include "~~prelude/prelude#.scm")
 (define lib-directory "lib/")
 (define lib-name "sdl2")
 (define lib-suffix ".o1")
