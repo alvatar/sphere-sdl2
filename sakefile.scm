@@ -10,11 +10,10 @@
   (delete-file lib-directory))
 
 (define-task compile (init)
-  (gambit-eval
-    "
-    (begin
-     (include \"~~prelude/prelude#.scm\")
-     (compile-file \"module.scm\" output: \"build/sdl2.o1\" cc-options: \"-w -I/usr/local/include/SDL2\" ld-options: \"-L/usr/local/lib -lSDL2\"))"))
+  (gambit-eval-here
+   '(begin
+      (include "~~prelude/prelude#.scm")
+      (compile-file "module.scm" output: "build/sdl2.o1" cc-options: "-w -I/usr/local/include/SDL2" ld-options: "-L/usr/local/lib -lSDL2"))))
 
 (define-task install (compile)
   (make-directory lib-directory)
