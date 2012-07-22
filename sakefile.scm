@@ -23,7 +23,7 @@
   (gambit-eval-here
    `(begin
       (include "~~prelude/prelude#.scm")
-      (compile-file-to-c
+      (compile-file-to-target
        "module.scm"
        output: ,(string-append (current-build-directory) lib-name c-suffix)))))
 
