@@ -33,7 +33,7 @@
          file)))
     (gambit-eval-here
      `(begin
-        (include "~~prelude/prelude#.scm")
+        (include "~~base/prelude#.scm")
         ;; Compile object
         (compile-file ,module-maker-object
                       output: "build/sdl2.o1"
@@ -51,7 +51,7 @@
 (define-task compile-to-c (init)
   (gambit-eval-here
    `(begin
-      (include "~~prelude/prelude#.scm")
+      (include "~~base/prelude#.scm")
       )))
 
 (define-task install (compile compile-to-c)
