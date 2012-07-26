@@ -11,21 +11,48 @@
   (delete-file lib-directory))
 
 (define-task compile (init)
-  (gambit-eval-here
-   '(begin
-      (include "~~prelude/prelude#.scm")
-      (compile-file "module.scm"
-                    output: "build/sdl2.o1"
-                    cc-options: "-w -I/usr/local/include/SDL2"
-                    ld-options: "-L/usr/local/lib -lSDL2"))))
+  (let ((module-maker-object (string-append (current-build-directory) "make-module-o-" lib-name ".scm"))
+        (module-maker-c (string-append (current-build-directory) "make-module-c-" lib-name ".scm")))
+    ;; Prepare module maker for native object target
+    (call-with-output-file
+        module-maker-object
+      (lambda (file)
+        (display
+         (string-append
+          "(%include base: ffi)"
+          "(include  \"../src/" lib-name ".scm\")")
+         file)))
+    ;; Prepare module maker for C target
+    (call-with-output-file
+        module-maker-c
+      (lambda (file)
+        (display
+         (string-append
+          "(%include base: ffi#)"
+          "(include  \"../src/" lib-name ".scm\")")
+         file)))
+    (gambit-eval-here
+     `(begin
+        (include "~~prelude/prelude#.scm")
+        ;; Compile object
+        (compile-file ,module-maker-object
+                      output: "build/sdl2.o1"
+                      cc-options: "-w -I/usr/local/include/SDL2"
+                      ld-options: "-L/usr/local/lib -lSDL2")
+        ;; Compile to C
+        (compile-file-to-target
+         ,module-maker-c
+         output: ,(string-append (current-build-directory) lib-name c-suffix))))
+    (delete-file module-maker-object)
+    (delete-file module-maker-c)))
+  
+  
 
 (define-task compile-to-c (init)
   (gambit-eval-here
    `(begin
       (include "~~prelude/prelude#.scm")
-      (compile-file-to-target
-       "module.scm"
-       output: ,(string-append (current-build-directory) lib-name c-suffix)))))
+      )))
 
 (define-task install (compile compile-to-c)
   (make-directory lib-directory)
