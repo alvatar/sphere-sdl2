@@ -7,16 +7,17 @@
   (sake:default-clean))
 
 (define-task compile ()
-  (let ((cc-options "-w -I/usr/local/include/SDL2")
+  (let ((include '((base: ffi#)))
+        (cc-options "-w -I/usr/local/include/SDL2")
         (ld-options "-L/usr/local/lib -lSDL2"))
     (for-each (lambda (m)
-                (sake:compile-c-file (sake:generate-c-file m include: '((base: ffi)))
+                (sake:compile-c-file (sake:generate-c-file m include: include)
                                      cc-options: cc-options
                                      ld-options: ld-options)
                 (sake:compile-c-file (sake:generate-c-file
                                       m
                                       version: '(debug)
-                                      include: '((base: ffi))
+                                      include: include
                                       compiler-options: '(debug))
                                      cc-options: cc-options
                                      ld-options: ld-options))
