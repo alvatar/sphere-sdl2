@@ -3,6 +3,7 @@
 (c-declare "#include \"SDL.h\"")
 
 (c-define-type SDL_BlitMap* (pointer "SDL_BlitMap"))
+(c-define-type SDL_bool "SDL_bool")
 (c-define-type SDL_EventType int)
 (c-define-type SDL_GLattr int)
 (c-define-type SDL_GLContext (pointer void))
@@ -11,6 +12,7 @@
 (c-define-type SDL_WindowEventID int)
 (c-define-type SDL_WindowFlags int)
 (c-define-type SDL_Rect "SDL_Rect")
+(c-define-type SDL_Rect* (pointer SDL_Rect))
 (c-define-type SDL_Scancode int)
 (c-define-type SDL_Keycode int32)
 
@@ -43,17 +45,13 @@
          (window SDL_WindowEvent voidstar)
          (key SDL_KeyboardEvent voidstar))
 
-(c-define-type void* (pointer void))
-
 (c-struct SDL_Surface
-          ;(format SDL_PixelFormat*)
+          (format SDL_PixelFormat*)
           (w int)
           (h int)
           (pitch int)
-          ;(pixels void*)
-          ;(userdata void*)
-          ;(clip_rect SDL_Rect)
-          ;(refcount int)
-          )
-
+          (pixels void*)
+          (userdata void*)
+          (clip_rect SDL_Rect)
+          (refcount int))
 
