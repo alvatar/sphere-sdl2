@@ -7,7 +7,8 @@
   (sake:default-clean))
 
 (define-task compile ()
-  (let ((include '((base: ffi#)))
+  (let ((include '((base: ffi#)
+                   (sdl2#)))
         (cc-options "-w -I/usr/local/include/SDL2")
         (ld-options "-L/usr/local/lib -lSDL2"))
     (for-each (lambda (m)

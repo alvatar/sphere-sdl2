@@ -1,47 +1,3 @@
-;; Bindings by Estevo Castro
-
-(c-declare "#include \"SDL.h\"")
-
-; SDL
-
-(c-define-type SDL_EventType int)
-(c-define-type SDL_GLattr int)
-(c-define-type SDL_GLContext (pointer void))
-(c-define-type SDL_Window* (pointer "SDL_Window"))
-(c-define-type SDL_WindowEventID int)
-(c-define-type SDL_WindowFlags int)
-(c-define-type SDL_Scancode int)
-(c-define-type SDL_Keycode int32)
-
-(c-struct SDL_WindowEvent
-  (type unsigned-int32)
-  (timestamp unsigned-int32)
-  (windowID unsigned-int32)
-  (event unsigned-int8)
-  (data1 int)
-  (data2 int))
-
-(c-struct SDL_Keysym
-  ;XXX: for C++ compatibility, I would need a way to instruct the c-struct
-  ;     macro to cast this when assigning.
-  (scancode SDL_Scancode)
-  (sym SDL_Keycode)
-  (mod unsigned-int16)
-  (unicode unsigned-int32))
-
-(c-struct SDL_KeyboardEvent
-  (type unsigned-int32)
-  (timestamp unsigned-int32)
-  (windowID unsigned-int32)
-  (state unsigned-int8)
-  (repeat unsigned-int8)
-  (keysym SDL_Keysym voidstar))
-
-(c-union SDL_Event
-  (type unsigned-int32)
-  (window SDL_WindowEvent voidstar)
-  (key SDL_KeyboardEvent voidstar))
-
 (c-constants
   SDL_INIT_TIMER
   SDL_INIT_AUDIO
@@ -373,6 +329,19 @@
   SDLK_KBDILLUMUP
   SDLK_EJECT
   SDLK_SLEEP
+  SDL_LOG_PRIORITY_VERBOSE
+  SDL_LOG_PRIORITY_DEBUG
+  SDL_LOG_PRIORITY_INFO
+  SDL_LOG_PRIORITY_WARN
+  SDL_LOG_PRIORITY_ERROR
+  SDL_LOG_PRIORITY_CRITICAL
+  SDL_LOG_CATEGORY_APPLICATION
+  SDL_LOG_CATEGORY_ERROR
+  SDL_LOG_CATEGORY_SYSTEM
+  SDL_LOG_CATEGORY_AUDIO
+  SDL_LOG_CATEGORY_VIDEO
+  SDL_LOG_CATEGORY_RENDER
+  SDL_LOG_CATEGORY_INPUT
   )
 
 (define SDL_CreateWindow
@@ -382,6 +351,9 @@
 
 (define SDL_GetError
   (c-lambda () char-string "SDL_GetError"))
+
+(define SDL_GetWindowSurface
+  (c-lambda (SDL_Window*) SDL_Surface* "SDL_GetWindowSurface"))
 
 (define SDL_GL_CreateContext
   (c-lambda (SDL_Window*) SDL_GLContext "SDL_GL_CreateContext"))
@@ -401,14 +373,14 @@
 
 (define SDL_GL_GetAttribute
   (c-lambda (SDL_GLattr (pointer int)) int
-    ; In this and other functions taking C enums, explicitly casting to the
-    ; appropriate enum type is required for compatibility with C++ compilers
-    ; (building with these is untested, though).
-    "___result = SDL_GL_GetAttribute((SDL_GLattr)___arg1, (int*)___arg2_voidstar);"))
+            ;; In this and other functions taking C enums, explicitly casting to the
+            ;; appropriate enum type is required for compatibility with C++ compilers
+            ;; (building with these remains untested)
+            "___result = SDL_GL_GetAttribute((SDL_GLattr)___arg1, (int*)___arg2_voidstar);"))
 
 (define SDL_GL_SetAttribute
   (c-lambda (SDL_GLattr int) int
-    "___result = SDL_GL_SetAttribute((SDL_GLattr)___arg1, ___arg2);"))
+            "___result = SDL_GL_SetAttribute((SDL_GLattr)___arg1, ___arg2);"))
 
 (define SDL_GL_SetSwapInterval
   (c-lambda (int) int "SDL_GL_SetSwapInterval"))
@@ -425,14 +397,48 @@
 (define SDL_Init
   (c-lambda (unsigned-int32) int "SDL_Init"))
 
+(define SDL_Log
+  (c-lambda (char-string) void "SDL_Log"))
+
+(define SDL_LogCritical
+  (c-lambda (int char-string) void "SDL_LogCritical"))
+
+(define SDL_LogDebug
+  (c-lambda (int char-string) void "SDL_LogDebug"))
+
+(define SDL_LogError
+  (c-lambda (int char-string) void "SDL_LogError"))
+
+(define SDL_LogInfo
+  (c-lambda (int char-string) void "SDL_LogInfo"))
+
+(define SDL_LogMessage
+  (c-lambda (int int char-string) void "SDL_LogMessage"))
+
+;; TODO
+;; (define SDL_LogMessageV
+;;   (c-lambda (int int char-string) void "SDL_LogMessageV"))
+
+(define SDL_LogSetAllPriority
+  (c-lambda (int) void "SDL_LogSetAllPriority"))
+
+(define SDL_LogVerbose
+  (c-lambda (int char-string) void "SDL_LogVerbose"))
+
+(define SDL_LogWarn
+  (c-lambda (int char-string) void "SDL_LogWarn"))
+
 (define SDL_PollEvent
   (c-lambda (SDL_Event*) int "SDL_PollEvent"))
+
+(define SDL_Quit
+  (c-lambda () void "SDL_Quit"))
 
 (define SDL_RaiseWindow
   (c-lambda (SDL_Window*) void "SDL_RaiseWindow"))
 
-(define SDL_Quit
-  (c-lambda () void "SDL_Quit"))
+(define SDL_UpdateWindowSurface
+  (c-lambda (SDL_Window*) int "SDL_UpdateWindowSurface"))
 
 (define SDL_WaitEvent
   (c-lambda (SDL_Event*) int "SDL_WaitEvent"))
