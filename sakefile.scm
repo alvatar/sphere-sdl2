@@ -12,16 +12,21 @@
         (cc-options "-w -I/usr/local/include/SDL2")
         (ld-options "-L/usr/local/lib -lSDL2"))
     (for-each (lambda (m)
-                (sake:compile-c-file (sake:generate-c-file m include: include)
-                                     cc-options: cc-options
-                                     ld-options: ld-options)
-                (sake:compile-c-file (sake:generate-c-file
-                                      m
-                                      version: '(debug)
-                                      include: include
-                                      compiler-options: '(debug))
-                                     cc-options: cc-options
-                                     ld-options: ld-options))
+                (sake:compile-to-c m include: include)
+                (sake:compile-to-o m
+                                   include: include
+                                   cc-options: cc-options
+                                   ld-options: ld-options)
+                (sake:compile-to-c m
+                                   version: '(debug)
+                                   include: include
+                                   compiler-options: '(debug))
+                (sake:compile-to-o m
+                                   version: '(debug)
+                                   include: include
+                                   compiler-options: '(debug)
+                                   cc-options: cc-options
+                                   ld-options: ld-options))
               modules)))
 
 (define-task install ()
