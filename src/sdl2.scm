@@ -442,6 +442,9 @@
 (define SDL_GetWindowSurface
   (c-lambda (SDL_Window*) SDL_Surface* "SDL_GetWindowSurface"))
 
+(define SDL_GetWindowSize
+  (c-lambda (SDL_Window* int* int*) void "SDL_GetWindowSize"))
+
 (define SDL_GL_CreateContext
   (c-lambda (SDL_Window*) SDL_GLContext "SDL_GL_CreateContext"))
 
