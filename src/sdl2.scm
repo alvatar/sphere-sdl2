@@ -461,6 +461,9 @@
 (define SDL_GL_DeleteContext
   (c-lambda (SDL_GLContext) void "SDL_GL_DeleteContext"))
 
+(define SDL_GL_Extension_Supported
+  (c-lambda (char-string) bool "SDL_GL_ExtensionSupported"))
+
 (define SDL_GL_GetAttribute
   (c-lambda (SDL_GLattr (pointer int)) int
             ;; In this and other functions taking C enums, explicitly casting to the
@@ -520,7 +523,7 @@
 
 (define SDL_PixelFormatEnumToMasks
   (c-lambda (unsigned-int32 int* unsigned-int32* unsigned-int32* unsigned-int32* unsigned-int32*)
-            SDL_bool
+            bool
             "SDL_PixelFormatEnumToMasks"))
 
 (define SDL_PollEvent
