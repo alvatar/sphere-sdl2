@@ -1,29 +1,21 @@
-(include "~~spheres/prelude#.scm")
-(%include sake: utils#)
-
 (define modules '(sdl2))
 
 (define-task clean ()
   (sake:default-clean))
 
 (define-task compile ()
-  (let ((include '((base: ffi#)
-                   (sdl2: sdl2#)))
-        (cc-options "-w -I/usr/local/include/SDL2")
+  (let ((cc-options "-w -I/usr/local/include/SDL2")
         (ld-options "-L/usr/local/lib -lSDL2"))
     (for-each (lambda (m)
-                (sake:compile-to-c m include: include)
+                (sake:compile-to-c m)
                 (sake:compile-to-o m
-                                   include: include
                                    cc-options: cc-options
                                    ld-options: ld-options)
                 (sake:compile-to-c m
                                    version: '(debug)
-                                   include: include
                                    compiler-options: '(debug))
                 (sake:compile-to-o m
                                    version: '(debug)
-                                   include: include
                                    compiler-options: '(debug)
                                    cc-options: cc-options
                                    ld-options: ld-options))
