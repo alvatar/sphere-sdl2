@@ -1,4 +1,32 @@
-;; Bindings by Estevo Castro
+(##namespace ("sdl2#"
+              SDL_CreateWindow
+              SDL_Init
+              SDL_INIT_VIDEO
+              SDL_WINDOWPOS_CENTERED
+              SDL_WINDOW_OPENGL
+              SDL_WINDOW_BORDERLESS
+              SDL_GetWindowSize
+              SDL_GL_CreateContext
+              SDL_Log
+              make-SDL_Event
+              SDL_Event-pointer
+              SDL_PollEvent
+              SDL_Event-type
+              SDL_Event-window
+              SDL_WindowEvent-event
+              SDL_QUIT
+              SDL_MOUSEBUTTONDOWN
+              SDL_KEYDOWN
+              SDL_WINDOWEVENT
+              SDL_WINDOWEVENT_SIZE_CHANGED
+              SDL_WINDOWEVENT_MINIMIZED
+              SDL_WINDOWEVENT_RESTORED
+              SDL_WINDOWEVENT_RESIZED
+              SDL_LogInfo
+              SDL_GL_Extension_Supported
+              SDL_GL_SwapWindow
+              SDL_Delay
+              SDL_LOG_CATEGORY_APPLICATION))
 
 (cond-expand
  ((or compile-to-o compile-to-c)
