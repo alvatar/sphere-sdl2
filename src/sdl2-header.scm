@@ -1,5 +1,5 @@
 (cond-expand
- ((or compile-to-o compile-to-c)
+ ((or compile-to-c compile-to-o)
   (c-declare "#include \"SDL.h\"")
 
   (c-define-type SDL_BlitMap* (pointer "SDL_BlitMap"))
