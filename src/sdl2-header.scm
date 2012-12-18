@@ -40,10 +40,19 @@
             (repeat unsigned-int8)
             (keysym SDL_Keysym voidstar))
 
+  (c-struct SDL_MouseButtonEvent
+            (type unsigned-int32)
+            (windowID unsigned-int32)
+            (button unsigned-int8)
+            (state unsigned-int8)
+            (x int)
+            (y int))
+  
   (c-union SDL_Event
            (type unsigned-int32)
            (window SDL_WindowEvent voidstar)
-           (key SDL_KeyboardEvent voidstar))
+           (key SDL_KeyboardEvent voidstar)
+           (button SDL_MouseButtonEvent voidstar))
 
   (c-struct SDL_Surface
             (format SDL_PixelFormat*)
