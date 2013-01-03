@@ -1,14 +1,14 @@
 (sphere: "sdl2")
 (dependencies:
  (sdl2
-  (include
-   (base: ffi-macros)
+  (prelude
+   (core: ffi-header)
    (sdl2: sdl2-header))
   (load
-   (base: ffi)))
+   (core: ffi)))
  ((sdl2: sdl2 version: (debug))
   (include
-   (base: ffi-macros version: (debug))
+   (core: ffi-macros version: (debug))
    (sdl2: sdl2-header version: (debug)))
   (load
-   (base: ffi version: (debug)))))
+   (core: ffi version: (debug)))))
