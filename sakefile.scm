@@ -6,9 +6,13 @@
 (define-task compile ()
   (let ((cc-options "-w -I/usr/local/include/SDL2")
         (ld-options "-L/usr/local/lib -lSDL2"))
+    (sake:compile-c-to-o (sake:compile-to-c 'sdl2 compiler-options: '(debug))
+                         cc-options: cc-options
+                         ld-options: ld-options)
     (sake:compile-c-to-o (sake:compile-to-c 'sdl2)
                          cc-options: cc-options
                          ld-options: ld-options))
+  (sake:compile-c-to-o (sake:compile-to-c 'android-main compiler-options: '(debug)))
   (sake:compile-c-to-o (sake:compile-to-c 'android-main)))
 
 (define-task compile:android ()
@@ -44,7 +48,7 @@
       " && cp libs/armeabi/libSDL2.so " toolchain-path "/lib"))))
 
 (define-task install ()
-  (for-each sake:install-compiled-module modules)
+  (for-each (lambda (m) (sake:install-compiled-module m versions: '(() (debug)))) modules)
   (sake:install-sphere-to-system))
 
 (define-task uninstall ()
