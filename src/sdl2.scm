@@ -454,6 +454,9 @@
 (define SDL_DestroyWindow
   (c-lambda (SDL_Window*) void "SDL_DestroyWindow"))
 
+(define SDL_GetTicks
+  (c-lambda () unsigned-int32 "SDL_GetTicks"))
+
 (define SDL_GetWindowPosition
   (c-lambda (SDL_Window* (pointer int) (pointer int)) void
 	    "SDL_GetWindowPosition"))
