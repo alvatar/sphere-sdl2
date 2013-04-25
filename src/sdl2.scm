@@ -1,4 +1,4 @@
-(build-c-constants
+(c-define-constants
  SDL_INIT_TIMER
  SDL_INIT_AUDIO
  SDL_INIT_VIDEO
@@ -421,7 +421,7 @@
 	    "SDL_CreateWindow"))
 
 (define SDL_CreateRGBSurfaceFrom
-  (c-lambda (void* int int int int unsigned-int32 unsigned-int32 unsigned-int32 unsigned-int32)
+  (c-lambda ((pointer void #f) int int int int unsigned-int32 unsigned-int32 unsigned-int32 unsigned-int32)
             SDL_Surface*
             "SDL_CreateRGBSurfaceFrom"))
 
@@ -435,7 +435,7 @@
   (c-lambda (SDL_Window*) SDL_Surface* "SDL_GetWindowSurface"))
 
 (define SDL_GetWindowSize
-  (c-lambda (SDL_Window* int* int*) void "SDL_GetWindowSize"))
+  (c-lambda (SDL_Window* (pointer int) (pointer int)) void "SDL_GetWindowSize"))
 
 (define SDL_GL_CreateContext
   (c-lambda (SDL_Window*) SDL_GLContext "SDL_GL_CreateContext"))
@@ -520,7 +520,12 @@
   (c-lambda (int char-string) void "SDL_LogWarn"))
 
 (define SDL_PixelFormatEnumToMasks
-  (c-lambda (unsigned-int32 int* unsigned-int32* unsigned-int32* unsigned-int32* unsigned-int32*)
+  (c-lambda (unsigned-int32
+             (pointer int)
+             (pointer unsigned-int32)
+             (pointer unsigned-int32)
+             (pointer unsigned-int32)
+             (pointer unsigned-int32))
             bool
             "SDL_PixelFormatEnumToMasks"))
 
