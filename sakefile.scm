@@ -1,9 +1,12 @@
-(define modules '(sdl2 android-main))
+(define modules '(sdl2
+                  sdl2-image
+                  android-main))
 
 (define-task clean ()
   (sake:default-clean))
 
 (define-task compile ()
+  #;
   (let ((cc-options "-w -I/usr/local/include/SDL2")
         (ld-options "-L/usr/local/lib -lSDL2"))
     (sake:compile-c-to-o (sake:compile-to-c 'sdl2 compiler-options: '(debug))
@@ -12,8 +15,17 @@
     (sake:compile-c-to-o (sake:compile-to-c 'sdl2)
                          cc-options: cc-options
                          ld-options: ld-options))
-  (sake:compile-c-to-o (sake:compile-to-c 'android-main compiler-options: '(debug)))
-  (sake:compile-c-to-o (sake:compile-to-c 'android-main)))
+  (let ((cc-options "-w -I/usr/local/include/SDL2")
+        (ld-options "-L/usr/local/lib -lSDL2_image"))
+    (sake:compile-c-to-o (sake:compile-to-c 'sdl2-image compiler-options: '(debug))
+                         cc-options: cc-options
+                         ld-options: ld-options)
+    (sake:compile-c-to-o (sake:compile-to-c 'sdl2-image)
+                         cc-options: cc-options
+                         ld-options: ld-options))
+  ;;(sake:compile-c-to-o (sake:compile-to-c 'android-main compiler-options: '(debug)))
+  ;;(sake:compile-c-to-o (sake:compile-to-c 'android-main))
+  )
 
 (define-task compile:android ()
   (let* ((platform "android-9")

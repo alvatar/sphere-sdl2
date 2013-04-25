@@ -6,6 +6,8 @@
  (sdl2
   (prelude
    (core: ffi-header)
-   (sdl2: sdl2-header))
-  (load
-   (core: ffi))))
+   (sdl2: sdl2-header)))
+ (sdl2-image
+  (prelude
+   (core: ffi-header)
+   (sdl2: sdl2-header))))

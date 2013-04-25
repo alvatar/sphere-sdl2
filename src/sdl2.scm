@@ -1,3 +1,6 @@
+;;; Copyright (c) 2013 by Álvaro Castro Castilla. All Rights Reserved.
+;;; SDL2 Foreign Function Interface
+
 (c-define-constants
  SDL_INIT_TIMER
  SDL_INIT_AUDIO

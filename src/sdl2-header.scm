@@ -1,3 +1,6 @@
+;;; Copyright (c) 2013 by Álvaro Castro Castilla. All Rights Reserved.
+;;; SDL2 Foreign Function Interface
+
 (c-declare "#include \"SDL.h\"")
 
 (c-define-type SDL_BlitMap* (pointer "SDL_BlitMap"))
