@@ -434,8 +434,7 @@
 (c-define-struct SDL_Keysym
                  (scancode SDL_Scancode)
                  (sym SDL_Keycode)
-                 (mod unsigned-int16)
-                 (unicode unsigned-int32))
+                 (mod unsigned-int16))
 (c-define-struct SDL_KeyboardEvent
                  (type unsigned-int32)
                  (timestamp unsigned-int32)
