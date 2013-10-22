@@ -23,43 +23,51 @@
                                      ld-options: ld-options)))
             library-modules))
 
+;; (define-task compile:android ()
+;;   (let* ((platform "android-9")
+;;          (fusion-path (%sphere-path 'fusion))
+;;          (toolchain-path (string-append fusion-path "platform/" platform)))
+;;     (if (not (file-exists? toolchain-path))
+;;         (shell-command (string-append "mkdir -p " toolchain-path)))
+;;     (if (not (file-exists? (string-append toolchain-path "/bin")))
+;;         (shell-command
+;;          (string-append
+;;           "$ANDROID_NDK_PATH/build/tools/make-standalone-toolchain.sh --platform="
+;;           platform
+;;           " $NDK_PLATFORM --install-dir="
+;;           toolchain-path)))
+;;     ;;(sake:compile-c-to-o (sake:compile-to-c 'android-main compiler-options: '(debug)))
+;;     ;;(sake:compile-c-to-o (sake:compile-to-c 'android-main))
+;;     ;; (shell-command
+;;     ;;  (string-append
+;;     ;;   "export PATH=" toolchain-path "/bin:$PATH"
+;;     ;;   " && mkdir -p ext/SDL/build"
+;;     ;;   " && cd ext/SDL/build"
+;;     ;;   " && ../configure --host=arm-linux-androideabi --prefix="
+;;     ;;   toolchain-path
+;;     ;;   " && make -j "
+;;     ;;   " && make install"))
+;;     (shell-command
+;;      (string-append
+;;       "export PATH=" toolchain-path "/bin:$PATH"
+;;       " && cd ext/SDL/"
+;;       " && ln -sf ../SDL android-project/jni/SDL"
+;;       " && cd android-project"
+;;       " && rm -fR jni/src"
+;;       " && ndk-build -j"
+;;       " && cp libs/armeabi/libSDL2.so " toolchain-path "/lib"))))
+
 (define-task compile:android ()
-  (let* ((platform "android-9")
-         (fusion-path (%sphere-path 'fusion))
-         (toolchain-path (string-append fusion-path "platform/" platform)))
-    (if (not (file-exists? toolchain-path))
-        (shell-command (string-append "mkdir -p " toolchain-path)))
-    (if (not (file-exists? (string-append toolchain-path "/bin")))
-        (shell-command
-         (string-append
-          "$ANDROID_NDK_PATH/build/tools/make-standalone-toolchain.sh --platform="
-          platform
-          " $NDK_PLATFORM --install-dir="
-          toolchain-path)))
-    ;;(sake:compile-c-to-o (sake:compile-to-c 'android-main compiler-options: '(debug)))
-    ;;(sake:compile-c-to-o (sake:compile-to-c 'android-main))
-    ;; (shell-command
-    ;;  (string-append
-    ;;   "export PATH=" toolchain-path "/bin:$PATH"
-    ;;   " && mkdir -p ext/SDL/build"
-    ;;   " && cd ext/SDL/build"
-    ;;   " && ../configure --host=arm-linux-androideabi --prefix="
-    ;;   toolchain-path
-    ;;   " && make -j "
-    ;;   " && make install"))
-    (shell-command
-     (string-append
-      "export PATH=" toolchain-path "/bin:$PATH"
-      " && cd ext/SDL/"
-      " && ln -sf ../SDL android-project/jni/SDL"
-      " && cd android-project"
-      " && rm -fR jni/src"
-      " && ndk-build -j"
-      " && cp libs/armeabi/libSDL2.so " toolchain-path "/lib"))))
+  (shell-command "bash src/android/build.sh"))
+
+(define-task clean:android ()
+  (shell-command "bash src/android/clean.sh"))
 
 (define-task install ()
   (for-each (lambda (m) (sake:install-compiled-module (car m) versions: '(() (debug)))) library-modules)
   ;; (for-each (lambda (m) (sake:install-compiled-module m versions: '(() (debug)))) glue-modules)
+  (make-directory "lib/android")
+  (copy-file "src/android/libs" "lib/android/libs")
   (sake:install-sphere-to-system))
 
 (define-task uninstall ()
