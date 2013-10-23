@@ -7,22 +7,6 @@
 (define glue-modules
   '(android-main))
 
-(define-task clean ()
-  (sake:default-clean))
-
-(define-task compile ()
-  (for-each (lambda (module-info)
-              (let ((module (car module-info))
-                    (cc-options "-w -I/usr/include/SDL2")
-                    (ld-options (cdr module-info)))
-                (sake:compile-c-to-o (sake:compile-to-c module compiler-options: '(debug))
-                                     cc-options: cc-options
-                                     ld-options: ld-options)
-                (sake:compile-c-to-o (sake:compile-to-c module)
-                                     cc-options: cc-options
-                                     ld-options: ld-options)))
-            library-modules))
-
 ;; (define-task compile:android ()
 ;;   (let* ((platform "android-9")
 ;;          (fusion-path (%sphere-path 'fusion))
@@ -36,8 +20,8 @@
 ;;           platform
 ;;           " $NDK_PLATFORM --install-dir="
 ;;           toolchain-path)))
-;;     ;;(sake:compile-c-to-o (sake:compile-to-c 'android-main compiler-options: '(debug)))
-;;     ;;(sake:compile-c-to-o (sake:compile-to-c 'android-main))
+;;     ;;(sake#compile-c-to-o (sake#compile-to-c 'android-main compiler-options: '(debug)))
+;;     ;;(sake#compile-c-to-o (sake#compile-to-c 'android-main))
 ;;     ;; (shell-command
 ;;     ;;  (string-append
 ;;     ;;   "export PATH=" toolchain-path "/bin:$PATH"
@@ -57,21 +41,36 @@
 ;;       " && ndk-build -j"
 ;;       " && cp libs/armeabi/libSDL2.so " toolchain-path "/lib"))))
 
-(define-task compile:android ()
+(define-task android:compile ()
   (shell-command "bash src/android/build.sh"))
 
-(define-task clean:android ()
+(define-task android:clean ()
   (shell-command "bash src/android/clean.sh"))
+(define-task clean (android:clean)
+  (sake#default-clean))
+
+(define-task compile ()
+  (for-each (lambda (module-info)
+              (let ((module (car module-info))
+                    (cc-options "-w -I/usr/include/SDL2")
+                    (ld-options (cdr module-info)))
+                (sake#compile-c-to-o (sake#compile-to-c module compiler-options: '(debug))
+                                     cc-options: cc-options
+                                     ld-options: ld-options)
+                (sake#compile-c-to-o (sake#compile-to-c module)
+                                     cc-options: cc-options
+                                     ld-options: ld-options)))
+            library-modules))
 
 (define-task install ()
-  (for-each (lambda (m) (sake:install-compiled-module (car m) versions: '(() (debug)))) library-modules)
-  ;; (for-each (lambda (m) (sake:install-compiled-module m versions: '(() (debug)))) glue-modules)
+  (for-each (lambda (m) (sake#install-compiled-module (car m) versions: '(() (debug)))) library-modules)
+  ;; (for-each (lambda (m) (sake#install-compiled-module m versions: '(() (debug)))) glue-modules)
   (make-directory "lib/android")
   (copy-file "src/android/libs" "lib/android/libs")
-  (sake:install-sphere-to-system))
+  (sake#install-sphere-to-system))
 
 (define-task uninstall ()
-  (sake:uninstall-sphere-from-system))
+  (sake#uninstall-sphere-from-system))
 
-(define-task all (compile install)
+(define-task all (compile android:compile install)
   'all)
