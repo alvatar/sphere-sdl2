@@ -20,11 +20,8 @@
 (define-task install ()
   (for-each (lambda (m) (sake#install-compiled-module (car m) versions: '(() (debug)))) library-modules)
   (make-directory "lib/android")
-  (copy-file "src/android/libs" "lib/android/libs")
-  (sake#install-sphere-to-system))
+  ;(copy-file "src/android/libs" "lib/android/libs")
+  )
 
-(define-task uninstall ()
-  (sake#uninstall-sphere-from-system))
-
-(define-task all (compile android:compile install)
+(define-task all (compile install)
   'all)
