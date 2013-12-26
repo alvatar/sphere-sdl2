@@ -7,10 +7,10 @@
 (c-define-type TTF_Font* (pointer TTF_Font))
 
 (define TTF_GetError
-  (c-lambda () char-string "TTF_GetError"))
+  (c-lambda '() char-string "TTF_GetError"))
 
 (define TTF_Init
-  (c-lambda () int "TTF_Init"))
+  (c-lambda '() int "TTF_Init"))
 
 (define TTF_OpenFont
   (c-lambda (char-string int) TTF_Font* "TTF_OpenFont"))

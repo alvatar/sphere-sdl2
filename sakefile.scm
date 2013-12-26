@@ -23,5 +23,8 @@
   ;(copy-file "src/android/libs" "lib/android/libs")
   )
 
+(define-task system-install ()
+  (sake#install-sphere-to-system))
+
 (define-task all (compile install)
   'all)

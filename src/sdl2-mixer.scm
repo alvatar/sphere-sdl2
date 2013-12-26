@@ -34,10 +34,10 @@
   (c-lambda (int) int "Mix_Init"))
 
 (define Mix_GetError
-  (c-lambda () char-string "Mix_GetError"))
+  (c-lambda '() char-string "Mix_GetError"))
 
 (define Mix_HaltMusic
-  (c-lambda () int "Mix_HaltMusic"))
+  (c-lambda '() int "Mix_HaltMusic"))
 
 (define Mix_LoadMUS
   (c-lambda (char-string) Mix_Music* "Mix_LoadMUS"))
@@ -52,7 +52,7 @@
   (c-lambda (int Mix_Chunk* int) int "Mix_PlayChannel"))
 
 (define Mix_PlayingMusic
-  (c-lambda () int "Mix_PlayingMusic"))
+  (c-lambda '() int "Mix_PlayingMusic"))
 
 (define Mix_PlayMusic
   (c-lambda (Mix_Music* int) int "Mix_PlayMusic"))
