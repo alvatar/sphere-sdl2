@@ -5,19 +5,22 @@
     sdl2-ttf))
 
 (define-task compile ()
-  (for-each (lambda (module)
-              (sake#compile-module module compiler-options: '(debug))
-              (sake#compile-module module))
-            modules))
+  (for-each (lambda (m) (sake#compile-module m compiler-options: '(debug))) modules)
+  (for-each sake#compile-module modules))
+
+(define-task post-compile ()
+  ;;(make-directory "lib/android")
+  ;;(copy-file "src/android/libs" "lib/android/libs")
+  (for-each (lambda (m) (sake#make-module-available m versions: '(() (debug)))) modules))
 
 (define-task install ()
-  (for-each (lambda (m) (sake#install-compiled-module m versions: '(() (debug)))) modules)
-  ;(make-directory "lib/android")
-  ;(copy-file "src/android/libs" "lib/android/libs")
-  )
-
-(define-task force-install ()
   (sake#install-sphere-to-system))
 
-(define-task all (compile install)
+(define-task test ()
+  (sake#test-all))
+
+(define-task clean ()
+  (sake#default-clean))
+
+(define-task all (compile post-compile)
   'all)
