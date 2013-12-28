@@ -1,29 +1,22 @@
-(define library-modules
-  '((sdl2 . "-lSDL2")
-    (sdl2-image . "-lSDL2_image")
-    (sdl2-mixer . "-lSDL2_mixer")
-    (sdl2-ttf . "-lSDL2_ttf")))
+(define modules
+  '(sdl2
+    sdl2-image
+    sdl2-mixer
+    sdl2-ttf))
 
 (define-task compile ()
-  (for-each (lambda (module-info)
-              (let ((module (car module-info))
-                    (cc-options "-w -I/usr/include/SDL2")
-                    (ld-options (cdr module-info)))
-                (sake#compile-c-to-o (sake#compile-to-c module compiler-options: '(debug))
-                                     cc-options: cc-options
-                                     ld-options: ld-options)
-                (sake#compile-c-to-o (sake#compile-to-c module)
-                                     cc-options: cc-options
-                                     ld-options: ld-options)))
-            library-modules))
+  (for-each (lambda (module)
+              (sake#compile-module module compiler-options: '(debug))
+              (sake#compile-module module))
+            modules))
 
 (define-task install ()
-  (for-each (lambda (m) (sake#install-compiled-module (car m) versions: '(() (debug)))) library-modules)
-  (make-directory "lib/android")
+  (for-each (lambda (m) (sake#install-compiled-module m versions: '(() (debug)))) modules)
+  ;(make-directory "lib/android")
   ;(copy-file "src/android/libs" "lib/android/libs")
   )
 
-(define-task system-install ()
+(define-task force-install ()
   (sake#install-sphere-to-system))
 
 (define-task all (compile install)
