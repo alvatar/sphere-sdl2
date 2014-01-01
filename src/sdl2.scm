@@ -1,4 +1,4 @@
-;;; Copyright (c) 2013 by Álvaro Castro Castilla. All Rights Reserved.
+;;; 2013-2014 by Álvaro Castro-Castilla, Estevo Castro.
 ;;; SDL2 Foreign Function Interface
 
 
