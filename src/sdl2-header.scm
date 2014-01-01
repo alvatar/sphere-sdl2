@@ -10,6 +10,8 @@
 (c-define-type SDL_GLattr int)
 (c-define-type SDL_GLContext (pointer void))
 (c-define-type SDL_PixelFormat*  (pointer "SDL_PixelFormat"))
+(c-define-type SDL_Renderer*  (pointer "SDL_Renderer"))
+(c-define-type SDL_Texture*  (pointer "SDL_Texture"))
 (c-define-type SDL_Window* (pointer "SDL_Window"))
 (c-define-type SDL_WindowEventID int)
 (c-define-type SDL_WindowFlags int)

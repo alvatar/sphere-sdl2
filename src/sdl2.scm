@@ -14,6 +14,10 @@
  SDL_INIT_HAPTIC
  SDL_INIT_NOPARACHUTE
  SDL_INIT_EVERYTHING
+ SDL_RENDERER_SOFTWARE
+ SDL_RENDERER_ACCELERATED
+ SDL_RENDERER_PRESENTVSYNC
+ SDL_RENDERER_TARGETTEXTURE
  SDL_WINDOWPOS_UNDEFINED
  SDL_WINDOWPOS_CENTERED
  SDL_WINDOW_FULLSCREEN
@@ -501,6 +505,13 @@
 (define SDL_GL_CreateContext
   (c-lambda (SDL_Window*) SDL_GLContext "SDL_GL_CreateContext"))
 
+(define SDL_CreateRenderer
+  (c-lambda (SDL_Window* int unsigned-int32) SDL_Renderer*
+    "SDL_CreateRenderer"))
+
+(define SDL_CreateTextureFromSurface
+  (c-lambda (SDL_Renderer* SDL_Surface*) SDL_Texture* "SDL_CreateTextureFromSurface"))
+
 (define SDL_Delay
   (c-lambda (unsigned-int32) void "SDL_Delay"))
 
@@ -519,6 +530,9 @@
 
 (define SDL_GL_Extension_Supported
   (c-lambda (char-string) bool "SDL_GL_ExtensionSupported"))
+
+(define SDL_RenderPresent
+  (c-lambda (SDL_Renderer*) void "SDL_RenderPresent"))
 
 (define SDL_GL_GetAttribute
   (c-lambda (SDL_GLattr (pointer int)) int
