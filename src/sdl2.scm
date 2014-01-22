@@ -490,7 +490,7 @@
   (c-lambda (SDL_Surface*) void "SDL_FreeSurface"))
 
 (define SDL_GetError
-  (c-lambda '() char-string "SDL_GetError"))
+  (c-lambda () char-string "SDL_GetError"))
 
 (define SDL_GetWindowSurface
   (c-lambda (SDL_Window*) SDL_Surface* "SDL_GetWindowSurface"))
@@ -508,7 +508,7 @@
   (c-lambda (SDL_Window*) void "SDL_DestroyWindow"))
 
 (define SDL_GetTicks
-  (c-lambda '() unsigned-int32 "SDL_GetTicks"))
+  (c-lambda () unsigned-int32 "SDL_GetTicks"))
 
 (define SDL_GetWindowPosition
   (c-lambda (SDL_Window* (pointer int) (pointer int)) void
@@ -538,10 +538,10 @@
   (c-lambda (SDL_Window*) void "SDL_GL_SwapWindow"))
 
 (define SDL_GetPerformanceCounter
-  (c-lambda '() unsigned-int64 "SDL_GetPerformanceCounter"))
+  (c-lambda () unsigned-int64 "SDL_GetPerformanceCounter"))
 
 (define SDL_GetPerformanceFrequency
-  (c-lambda '() unsigned-int64 "SDL_GetPerformanceFrequency"))
+  (c-lambda () unsigned-int64 "SDL_GetPerformanceFrequency"))
 
 (define SDL_Init
   (c-lambda (unsigned-int32) int "SDL_Init"))
@@ -594,7 +594,7 @@
   (c-lambda (SDL_Event*) int "SDL_PollEvent"))
 
 (define SDL_Quit
-  (c-lambda '() void "SDL_Quit"))
+  (c-lambda () void "SDL_Quit"))
 
 (define SDL_RaiseWindow
   (c-lambda (SDL_Window*) void "SDL_RaiseWindow"))

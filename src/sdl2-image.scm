@@ -10,7 +10,7 @@
 
 ;;! IMG_GetError
 (define IMG_GetError
-  (c-lambda '() char-string "IMG_GetError"))
+  (c-lambda () char-string "IMG_GetError"))
 
 ;;! IMG_Init
 (define IMG_Init
