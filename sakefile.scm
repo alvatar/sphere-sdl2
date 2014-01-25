@@ -1,8 +1,9 @@
 (define modules
   '(sdl2
-    sdl2-image
-    sdl2-mixer
-    sdl2-ttf))
+    ;sdl2-image
+    ;sdl2-mixer
+    ;sdl2-ttf
+    ))
 
 (define-task compile ()
   (for-each (lambda (m) (sake#compile-module m compiler-options: '(debug))) modules)
