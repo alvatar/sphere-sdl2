@@ -22,14 +22,69 @@ end-of-string
 ;;------------------------------------------------------------------------------
 ;;!! Types
 
+(c-define-type SDL_AudioDeviceID unsigned-int32)
 (c-define-type SDL_AudioFormat unsigned-int16)
 (c-define-type SDL_AudioCallback (function (void* unsigned-int8* int) void))
+(c-define-type SDL_AudioStatus int) ; enum
+(c-define-type SDL_bool int)
+(c-define-type SDL_BlendMode int) ; enum
+(c-define-type SDL_BlendMode* (pointer SDL_BlendMode))
+(c-define-type SDL_cond (struct "SDL_cond"))
+(c-define-type SDL_cond* (pointer SDL_cond))
+(c-define-type SDL_Cursor (struct "SDL_Cursor"))
+(c-define-type SDL_Cursor* (pointer SDL_Cursor))
+(c-define-type SDL_eventaction int) ; enum
 (c-define-type SDL_FingerID int64)
+(c-define-type SDL_GameController (struct "SDL_GameController"))
+(c-define-type SDL_GameController* (pointer SDL_GameController))
+(c-define-type SDL_GameControllerAxis int) ; enum
+(c-define-type SDL_GameControllerButton int) ; enum
+(c-define-type SDL_GameControllerButtonBind (struct "SDL_GameControllerButtonBind"))
 (c-define-type SDL_GestureID int64)
+(c-define-type SDL_GLContext void*)
+(c-define-type SDL_GLattr int) ; enum
+(c-define-type SDL_Haptic (struct "SDL_Haptic"))
+(c-define-type SDL_Haptic* (pointer SDL_Haptic))
+(c-define-type SDL_HintPriority int) ; enum
+(c-define-type SDL_Joystick (struct "SDL_Joystick"))
+(c-define-type SDL_Joystick* (pointer SDL_Joystick))
+(c-define-type SDL_JoystickGUID (struct "SDL_JoystickGUID"))
 (c-define-type SDL_JoystickID int32)
-(c-define-type SDL_Keycode int) ; enums are ints in C
+(c-define-type SDL_Keycode int) ; enum
+(c-define-type SDL_Keymod int) ; enum
+(c-define-type SDL_LogPriority int) ; enum
+(c-define-type SDL_MessageBoxData "SDL_MessageBoxData")
+(c-define-type SDL_MessageBoxData* (pointer SDL_MessageBoxData))
+(c-define-type SDL_mutex (struct "SDL_mutex"))
+(c-define-type SDL_mutex* (pointer SDL_mutex))
+(c-define-type SDL_PowerState int) ; enum
+(c-define-type SDL_Renderer (struct "SDL_Renderer"))
+(c-define-type SDL_Renderer* (pointer SDL_Renderer))
+(c-define-type SDL_Renderer** (pointer SDL_Renderer*))
+(c-define-type SDL_RendererFlip int) ; enum
+(c-define-type SDL_RWops (struct "SDL_RWops"))
+(c-define-type SDL_RWops* (pointer SDL_RWops))
+(c-define-type SDL_Scancode int) ; enum
+(c-define-type SDL_sem (struct "SDL_sem"))
+(c-define-type SDL_sem* (pointer SDL_sem))
+(c-define-type SDL_SpinLock int)
+(c-define-type SDL_SpinLock* (pointer SDL_SpinLock))
+(c-define-type SDL_SystemCursor int) ; enum
+(c-define-type SDL_Texture (struct "SDL_Texture"))
+(c-define-type SDL_Texture* (pointer SDL_Texture))
+(cond-expand
+ (sdl:threads
+  (c-define-type SDL_Thread (struct "SDL_Thread"))
+  (c-define-type SDL_Thread* (pointer SDL_Thread))
+  (c-define-type SDL_threadID unsigned-long)
+  (c-define-type SDL_ThreadPriority int) ; enum
+  (sdl:threads (c-define-type SDL_TLSID unsigned-int)))
+ (else #!void))
+(c-define-type SDL_TimerID int)
 (c-define-type SDL_TouchID int64)
-(c-define-type SDL_Scancode int) ; enums are ints in C
+(c-define-type SDL_Window (struct "SDL_Window"))
+(c-define-type SDL_Window* (pointer SDL_Window))
+(c-define-type SDL_Window** (pointer SDL_Window*))
 
 (c-define-type* (struct SDL_AudioCVT))
 (c-define-type* (struct SDL_AudioSpec))
@@ -65,9 +120,6 @@ end-of-string
 (c-define-type* (struct SDL_PixelFormat))
 (c-define-type* (struct SDL_Point))
 (c-define-type* (struct SDL_QuitEvent))
-;; According to SDL2 documentation, applications shouldn't have to care
-;; about the internals of this structure, so we keep it opaque
-(c-define-type SDL_RWops (struct "SDL_RWops"))
 (c-define-type* (struct SDL_Rect))
 (c-define-type* (struct SDL_RendererInfo))
 (c-define-type* (struct SDL_Surface))
@@ -79,6 +131,23 @@ end-of-string
 (c-define-type* (struct SDL_TouchFingerEvent))
 (c-define-type* (struct SDL_UserEvent))
 (c-define-type* (struct SDL_WindowEvent))
-(c-define-type* (struct SDL_assert_data))
-(c-define-type* (struct SDL_atomic_t))
+(cond-expand
+ (sdl:assert
+  (c-define-type* (struct SDL_assert_data)))
+ (else #!void))
+(cond-expand
+ (sdl:atomic
+  (c-define-type* (struct SDL_atomic_t)))
+ (else #!void))
 (c-define-type* (struct SDL_version))
+
+(c-define-type SDL_EventFilter (function (void* SDL_Event) int))
+(c-define-type SDL_EventFilter* (pointer SDL_EventFilter))
+(c-define-type SDL_HintCallback (function (void* nonnull-char-string nonnull-char-string nonnull-char-string) void))
+(c-define-type SDL_LogOutputFunction (function (void* int SDL_LogPriority nonnull-char-string) void))
+(c-define-type SDL_LogOutputFunction* (pointer SDL_LogOutputFunction))
+(c-define-type SDL_TimerCallback (function (unsigned-int32 void*) unsigned-int32))
+(cond-expand
+ (sdl:threads
+  (c-define-type SDL_ThreadFunction (function (void*) int)))
+ (else #!void))
