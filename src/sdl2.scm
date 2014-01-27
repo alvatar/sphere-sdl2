@@ -3,21 +3,888 @@
 
 
 (c-define-constants
- ;; Hints
-;; SDL_HINT_FRAMEBUFFER_ACCELERATION
- ;;SDL_HINT_IDLE_TIMER_DISABLED
- ;; SDL_HINT_ORIENTATIONS
- ;; SDL_HINT_RENDER_DRIVER
- ;; SDL_HINT_RENDER_OPENGL_SHADERS
- ;; SDL_HINT_RENDER_SCALE_QUALITY
- ;; SDL_HINT_RENDER_VSYNC
-
  SDL_AUDIO_MASK_BITSIZE
  SDL_AUDIO_MASK_DATATYPE
  SDL_AUDIO_MASK_ENDIAN
  SDL_AUDIO_MASK_SIGNED
- 
  )
+
+(define SDL_AUDIO_BITSIZE
+  (c-lambda (SDL_AudioFormat) SDL_AudioFormat "___result = SDL_AUDIO_BITSIZE(___arg1);"))
+(define SDL_AUDIO_ISFLOAT
+  (c-lambda (SDL_AudioFormat) SDL_AudioFormat "___result = SDL_AUDIO_ISFLOAT(___arg1);"))
+(define SDL_AUDIO_ISBIGENDIAN
+  (c-lambda (SDL_AudioFormat) SDL_AudioFormat "___result = SDL_AUDIO_ISBIGENDIAN(___arg1);"))
+(define SDL_AUDIO_ISSIGNED
+  (c-lambda (SDL_AudioFormat) SDL_AudioFormat "___result = SDL_AUDIO_ISSIGNED(___arg1);"))
+(define SDL_AUDIO_ISINT
+  (c-lambda (SDL_AudioFormat) SDL_AudioFormat "___result = SDL_AUDIO_ISINT(___arg1);"))
+(define SDL_AUDIO_ISLITTLEENDIAN
+  (c-lambda (SDL_AudioFormat) SDL_AudioFormat "___result = SDL_AUDIO_ISLITTLEENDIAN(___arg1);"))
+(define SDL_AUDIO_ISUNSIGNED
+  (c-lambda (SDL_AudioFormat) SDL_AudioFormat "___result = SDL_AUDIO_ISUNSIGNED(___arg1);"))
+
+(c-define-constants
+ AUDIO_U8
+ AUDIO_S8
+ AUDIO_U16LSB
+ AUDIO_S16LSB
+ AUDIO_U16MSB
+ AUDIO_S16MSB
+ AUDIO_U16
+ AUDIO_S16
+ AUDIO_S32LSB
+ AUDIO_S32MSB
+ AUDIO_S32
+ AUDIO_F32LSB
+ AUDIO_F32MSB
+ AUDIO_F32
+ AUDIO_U16SYS
+ AUDIO_S16SYS
+ AUDIO_S32SYS
+ AUDIO_F32SYS
+ AUDIO_U16SYS
+ AUDIO_S16SYS
+ AUDIO_S32SYS
+ AUDIO_F32SYS
+ )
+
+(c-define-constants
+ SDL_AUDIO_STOPPED
+ SDL_AUDIO_PLAYING
+ SDL_AUDIO_PAUSED
+ )
+
+(c-define-constants
+ SDL_BLENDMODE_NONE
+ SDL_BLENDMODE_BLEND
+ SDL_BLENDMODE_ADD
+ SDL_BLENDMODE_MOD
+ )
+
+(c-define-constants
+ SDL_QUIT
+ SDL_APP_TERMINATING
+ SDL_APP_LOWMEMORY
+ SDL_APP_WILLENTERBACKGROUND
+ SDL_APP_DIDENTERBACKGROUND
+ SDL_APP_WILLENTERFOREGROUND
+ SDL_APP_DIDENTERFOREGROUND
+ SDL_WINDOWEVENT
+ SDL_SYSWMEVENT
+ SDL_KEYDOWN
+ SDL_KEYUP
+ SDL_TEXTEDITING
+ SDL_TEXTINPUT
+ SDL_MOUSEMOTION
+ SDL_MOUSEBUTTONDOWN
+ SDL_MOUSEBUTTONUP
+ SDL_MOUSEWHEEL
+ SDL_JOYAXISMOTION
+ SDL_JOYBALLMOTION
+ SDL_JOYHATMOTION
+ SDL_JOYBUTTONDOWN
+ SDL_JOYBUTTONUP
+ SDL_JOYDEVICEADDED
+ SDL_JOYDEVICEREMOVED
+ SDL_CONTROLLERAXISMOTION
+ SDL_CONTROLLERBUTTONDOWN
+ SDL_CONTROLLERBUTTONUP
+ SDL_CONTROLLERDEVICEADDED
+ SDL_CONTROLLERDEVICEREMOVED
+ SDL_CONTROLLERDEVICEREMAPPED
+ SDL_FINGERDOWN
+ SDL_FINGERUP
+ SDL_FINGERMOTION
+ SDL_DOLLARGESTURE
+ SDL_DOLLARRECORD
+ SDL_MULTIGESTURE
+ SDL_CLIPBOARDUPDATE
+ SDL_DROPFILE
+ SDL_USEREVENT
+ SDL_LASTEVENT
+ )
+
+(c-define-constants
+ SDL_GL_RED_SIZE
+ SDL_GL_GREEN_SIZE
+ SDL_GL_BLUE_SIZE
+ SDL_GL_ALPHA_SIZE
+ SDL_GL_BUFFER_SIZE
+ SDL_GL_DOUBLEBUFFER
+ SDL_GL_DEPTH_SIZE
+ SDL_GL_STENCIL_SIZE
+ SDL_GL_ACCUM_RED_SIZE
+ SDL_GL_ACCUM_GREEN_SIZE
+ SDL_GL_ACCUM_BLUE_SIZE
+ SDL_GL_ACCUM_ALPHA_SIZE
+ SDL_GL_STEREO
+ SDL_GL_MULTISAMPLEBUFFERS
+ SDL_GL_MULTISAMPLESAMPLES
+ SDL_GL_ACCELERATED_VISUAL
+ SDL_GL_RETAINED_BACKING
+ SDL_GL_CONTEXT_MAJOR_VERSION
+ SDL_GL_CONTEXT_MINOR_VERSION
+ SDL_GL_CONTEXT_FLAGS
+ SDL_GL_CONTEXT_PROFILE_MASK
+ SDL_GL_SHARE_WITH_CURRENT_CONTEXT
+ SDL_GL_FRAMEBUFFER_SRGB_CAPABLE
+ )
+
+(c-define-constants
+ SDL_GL_CONTEXT_DEBUG_FLAG
+ SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG
+ SDL_GL_CONTEXT_ROBUST_ACCESS_FLAG
+ SDL_GL_CONTEXT_RESET_ISOLATION_FLAG
+ )
+
+(c-define-constants
+ SDL_GL_CONTEXT_PROFILE_CORE
+ SDL_GL_CONTEXT_PROFILE_COMPATIBILITY
+ SDL_GL_CONTEXT_PROFILE_ES
+ )
+
+(c-define-constants
+ SDL_HINT_DEFAULT
+ SDL_HINT_NORMAL
+ SDL_HINT_OVERRIDE
+ )
+
+(c-define-constants
+ SDLK_UNKNOWN
+ SDLK_RETURN
+ SDLK_ESCAPE
+ SDLK_BACKSPACE
+ SDLK_TAB
+ SDLK_SPACE
+ SDLK_EXCLAIM
+ SDLK_QUOTEDBL
+ SDLK_HASH
+ SDLK_PERCENT
+ SDLK_DOLLAR
+ SDLK_AMPERSAND
+ SDLK_QUOTE
+ SDLK_LEFTPAREN
+ SDLK_RIGHTPAREN
+ SDLK_ASTERISK
+ SDLK_PLUS
+ SDLK_COMMA
+ SDLK_MINUS
+ SDLK_PERIOD
+ SDLK_SLASH
+ SDLK_0
+ SDLK_1
+ SDLK_2
+ SDLK_3
+ SDLK_4
+ SDLK_5
+ SDLK_6
+ SDLK_7
+ SDLK_8
+ SDLK_9
+ SDLK_COLON
+ SDLK_SEMICOLON
+ SDLK_LESS
+ SDLK_EQUALS
+ SDLK_GREATER
+ SDLK_QUESTION
+ SDLK_AT
+ SDLK_LEFTBRACKET
+ SDLK_BACKSLASH
+ SDLK_RIGHTBRACKET
+ SDLK_CARET
+ SDLK_UNDERSCORE
+ SDLK_BACKQUOTE
+ SDLK_a
+ SDLK_b
+ SDLK_c
+ SDLK_d
+ SDLK_e
+ SDLK_f
+ SDLK_g
+ SDLK_h
+ SDLK_i
+ SDLK_j
+ SDLK_k
+ SDLK_l
+ SDLK_m
+ SDLK_n
+ SDLK_o
+ SDLK_p
+ SDLK_q
+ SDLK_r
+ SDLK_s
+ SDLK_t
+ SDLK_u
+ SDLK_v
+ SDLK_w
+ SDLK_x
+ SDLK_y
+ SDLK_z
+ SDLK_CAPSLOCK
+ SDLK_F1
+ SDLK_F2
+ SDLK_F3
+ SDLK_F4
+ SDLK_F5
+ SDLK_F6
+ SDLK_F7
+ SDLK_F8
+ SDLK_F9
+ SDLK_F10
+ SDLK_F11
+ SDLK_F12
+ SDLK_PRINTSCREEN
+ SDLK_SCROLLLOCK
+ SDLK_PAUSE
+ SDLK_INSERT
+ SDLK_HOME
+ SDLK_PAGEUP
+ SDLK_DELETE
+ SDLK_END
+ SDLK_PAGEDOWN
+ SDLK_RIGHT
+ SDLK_LEFT
+ SDLK_DOWN
+ SDLK_UP
+ SDLK_NUMLOCKCLEAR
+ SDLK_KP_DIVIDE
+ SDLK_KP_MULTIPLY
+ SDLK_KP_MINUS
+ SDLK_KP_PLUS
+ SDLK_KP_ENTER
+ SDLK_KP_1
+ SDLK_KP_2
+ SDLK_KP_3
+ SDLK_KP_4
+ SDLK_KP_5
+ SDLK_KP_6
+ SDLK_KP_7
+ SDLK_KP_8
+ SDLK_KP_9
+ SDLK_KP_0
+ SDLK_KP_PERIOD
+ SDLK_APPLICATION
+ SDLK_POWER
+ SDLK_KP_EQUALS
+ SDLK_F13
+ SDLK_F14
+ SDLK_F15
+ SDLK_F16
+ SDLK_F17
+ SDLK_F18
+ SDLK_F19
+ SDLK_F20
+ SDLK_F21
+ SDLK_F22
+ SDLK_F23
+ SDLK_F24
+ SDLK_EXECUTE
+ SDLK_HELP
+ SDLK_MENU
+ SDLK_SELECT
+ SDLK_STOP
+ SDLK_AGAIN
+ SDLK_UNDO
+ SDLK_CUT
+ SDLK_COPY
+ SDLK_PASTE
+ SDLK_FIND
+ SDLK_MUTE
+ SDLK_VOLUMEUP
+ SDLK_VOLUMEDOWN
+ SDLK_KP_COMMA
+ SDLK_KP_EQUALSAS400
+ SDLK_ALTERASE
+ SDLK_SYSREQ
+ SDLK_CANCEL
+ SDLK_CLEAR
+ SDLK_PRIOR
+ SDLK_RETURN2
+ SDLK_SEPARATOR
+ SDLK_OUT
+ SDLK_OPER
+ SDLK_CLEARAGAIN
+ SDLK_CRSEL
+ SDLK_EXSEL
+ SDLK_KP_00
+ SDLK_KP_000
+ SDLK_THOUSANDSSEPARATOR
+ SDLK_DECIMALSEPARATOR
+ SDLK_CURRENCYUNIT
+ SDLK_CURRENCYSUBUNIT
+ SDLK_KP_LEFTPAREN
+ SDLK_KP_RIGHTPAREN
+ SDLK_KP_LEFTBRACE
+ SDLK_KP_RIGHTBRACE
+ SDLK_KP_TAB
+ SDLK_KP_BACKSPACE
+ SDLK_KP_A
+ SDLK_KP_B
+ SDLK_KP_C
+ SDLK_KP_D
+ SDLK_KP_E
+ SDLK_KP_F
+ SDLK_KP_XOR
+ SDLK_KP_POWER
+ SDLK_KP_PERCENT
+ SDLK_KP_LESS
+ SDLK_KP_GREATER
+ SDLK_KP_AMPERSAND
+ SDLK_KP_DBLAMPERSAND
+ SDLK_KP_VERTICALBAR
+ SDLK_KP_DBLVERTICALBAR
+ SDLK_KP_COLON
+ SDLK_KP_HASH
+ SDLK_KP_SPACE
+ SDLK_KP_AT
+ SDLK_KP_EXCLAM
+ SDLK_KP_MEMSTORE
+ SDLK_KP_MEMRECALL
+ SDLK_KP_MEMCLEAR
+ SDLK_KP_MEMADD
+ SDLK_KP_MEMSUBTRACT
+ SDLK_KP_MEMMULTIPLY
+ SDLK_KP_MEMDIVIDE
+ SDLK_KP_PLUSMINUS
+ SDLK_KP_CLEAR
+ SDLK_KP_CLEARENTRY
+ SDLK_KP_BINARY
+ SDLK_KP_OCTAL
+ SDLK_KP_DECIMAL
+ SDLK_KP_HEXADECIMAL
+ SDLK_LCTRL
+ SDLK_LSHIFT
+ SDLK_LALT
+ SDLK_LGUI
+ SDLK_RCTRL
+ SDLK_RSHIFT
+ SDLK_RALT
+ SDLK_RGUI
+ SDLK_MODE
+ SDLK_AUDIONEXT
+ SDLK_AUDIOPREV
+ SDLK_AUDIOSTOP
+ SDLK_AUDIOPLAY
+ SDLK_AUDIOMUTE
+ SDLK_MEDIASELECT
+ SDLK_WWW
+ SDLK_MAIL
+ SDLK_CALCULATOR
+ SDLK_COMPUTER
+ SDLK_AC_SEARCH
+ SDLK_AC_HOME
+ SDLK_AC_BACK
+ SDLK_AC_FORWARD
+ SDLK_AC_STOP
+ SDLK_AC_REFRESH
+ SDLK_AC_BOOKMARKS
+ SDLK_BRIGHTNESSDOWN
+ SDLK_BRIGHTNESSUP
+ SDLK_DISPLAYSWITCH
+ SDLK_KBDILLUMTOGGLE
+ SDLK_KBDILLUMDOWN
+ SDLK_KBDILLUMUP
+ SDLK_EJECT
+ SDLK_SLEEP
+ )
+
+(c-define-constants
+ KMOD_NONE
+ KMOD_LSHIFT
+ KMOD_RSHIFT
+ KMOD_LCTRL
+ KMOD_RCTRL
+ KMOD_LALT
+ KMOD_RALT
+ KMOD_LGUI
+ KMOD_RGUI
+ KMOD_NUM
+ KMOD_CAPS
+ KMOD_MODE
+ KMOD_CTRL
+ KMOD_SHIFT
+ KMOD_ALT
+ KMOD_GUI
+ )
+
+(c-define-constants
+ SDL_SCANCODE_UNKNOWN
+ SDL_SCANCODE_A
+ SDL_SCANCODE_B
+ SDL_SCANCODE_C
+ SDL_SCANCODE_D
+ SDL_SCANCODE_E
+ SDL_SCANCODE_F
+ SDL_SCANCODE_G
+ SDL_SCANCODE_H
+ SDL_SCANCODE_I
+ SDL_SCANCODE_J
+ SDL_SCANCODE_K
+ SDL_SCANCODE_L
+ SDL_SCANCODE_M
+ SDL_SCANCODE_N
+ SDL_SCANCODE_O
+ SDL_SCANCODE_P
+ SDL_SCANCODE_Q
+ SDL_SCANCODE_R
+ SDL_SCANCODE_S
+ SDL_SCANCODE_T
+ SDL_SCANCODE_U
+ SDL_SCANCODE_V
+ SDL_SCANCODE_W
+ SDL_SCANCODE_X
+ SDL_SCANCODE_Y
+ SDL_SCANCODE_Z
+ SDL_SCANCODE_1
+ SDL_SCANCODE_2
+ SDL_SCANCODE_3
+ SDL_SCANCODE_4
+ SDL_SCANCODE_5
+ SDL_SCANCODE_6
+ SDL_SCANCODE_7
+ SDL_SCANCODE_8
+ SDL_SCANCODE_9
+ SDL_SCANCODE_0
+ SDL_SCANCODE_RETURN
+ SDL_SCANCODE_ESCAPE
+ SDL_SCANCODE_BACKSPACE
+ SDL_SCANCODE_TAB
+ SDL_SCANCODE_SPACE
+ SDL_SCANCODE_MINUS
+ SDL_SCANCODE_EQUALS
+ SDL_SCANCODE_LEFTBRACKET
+ SDL_SCANCODE_RIGHTBRACKET
+ SDL_SCANCODE_BACKSLASH
+ SDL_SCANCODE_NONUSHASH
+ SDL_SCANCODE_SEMICOLON
+ SDL_SCANCODE_APOSTROPHE
+ SDL_SCANCODE_GRAVE
+ SDL_SCANCODE_COMMA
+ SDL_SCANCODE_PERIOD
+ SDL_SCANCODE_SLASH
+ SDL_SCANCODE_CAPSLOCK
+ SDL_SCANCODE_F1
+ SDL_SCANCODE_F2
+ SDL_SCANCODE_F3
+ SDL_SCANCODE_F4
+ SDL_SCANCODE_F5
+ SDL_SCANCODE_F6
+ SDL_SCANCODE_F7
+ SDL_SCANCODE_F8
+ SDL_SCANCODE_F9
+ SDL_SCANCODE_F10
+ SDL_SCANCODE_F11
+ SDL_SCANCODE_F12
+ SDL_SCANCODE_PRINTSCREEN
+ SDL_SCANCODE_SCROLLLOCK
+ SDL_SCANCODE_PAUSE
+ SDL_SCANCODE_INSERT
+ SDL_SCANCODE_HOME
+ SDL_SCANCODE_PAGEUP
+ SDL_SCANCODE_DELETE
+ SDL_SCANCODE_END
+ SDL_SCANCODE_PAGEDOWN
+ SDL_SCANCODE_RIGHT
+ SDL_SCANCODE_LEFT
+ SDL_SCANCODE_DOWN
+ SDL_SCANCODE_UP
+ SDL_SCANCODE_NUMLOCKCLEAR
+ SDL_SCANCODE_KP_DIVIDE
+ SDL_SCANCODE_KP_MULTIPLY
+ SDL_SCANCODE_KP_MINUS
+ SDL_SCANCODE_KP_PLUS
+ SDL_SCANCODE_KP_ENTER
+ SDL_SCANCODE_KP_1
+ SDL_SCANCODE_KP_2
+ SDL_SCANCODE_KP_3
+ SDL_SCANCODE_KP_4
+ SDL_SCANCODE_KP_5
+ SDL_SCANCODE_KP_6
+ SDL_SCANCODE_KP_7
+ SDL_SCANCODE_KP_8
+ SDL_SCANCODE_KP_9
+ SDL_SCANCODE_KP_0
+ SDL_SCANCODE_KP_PERIOD
+ SDL_SCANCODE_NONUSBACKSLASH
+ SDL_SCANCODE_APPLICATION
+ SDL_SCANCODE_POWER
+ SDL_SCANCODE_KP_EQUALS
+ SDL_SCANCODE_F13
+ SDL_SCANCODE_F14
+ SDL_SCANCODE_F15
+ SDL_SCANCODE_F16
+ SDL_SCANCODE_F17
+ SDL_SCANCODE_F18
+ SDL_SCANCODE_F19
+ SDL_SCANCODE_F20
+ SDL_SCANCODE_F21
+ SDL_SCANCODE_F22
+ SDL_SCANCODE_F23
+ SDL_SCANCODE_F24
+ SDL_SCANCODE_EXECUTE
+ SDL_SCANCODE_HELP
+ SDL_SCANCODE_MENU
+ SDL_SCANCODE_SELECT
+ SDL_SCANCODE_STOP
+ SDL_SCANCODE_AGAIN
+ SDL_SCANCODE_UNDO
+ SDL_SCANCODE_CUT
+ SDL_SCANCODE_COPY
+ SDL_SCANCODE_PASTE
+ SDL_SCANCODE_FIND
+ SDL_SCANCODE_MUTE
+ SDL_SCANCODE_VOLUMEUP
+ SDL_SCANCODE_VOLUMEDOWN
+ SDL_SCANCODE_KP_COMMA
+ SDL_SCANCODE_KP_EQUALSAS400
+ SDL_SCANCODE_INTERNATIONAL1
+ SDL_SCANCODE_INTERNATIONAL2
+ SDL_SCANCODE_INTERNATIONAL3
+ SDL_SCANCODE_INTERNATIONAL4
+ SDL_SCANCODE_INTERNATIONAL5
+ SDL_SCANCODE_INTERNATIONAL6
+ SDL_SCANCODE_INTERNATIONAL7
+ SDL_SCANCODE_INTERNATIONAL8
+ SDL_SCANCODE_INTERNATIONAL9
+ SDL_SCANCODE_LANG1
+ SDL_SCANCODE_LANG2
+ SDL_SCANCODE_LANG3
+ SDL_SCANCODE_LANG4
+ SDL_SCANCODE_LANG5
+ SDL_SCANCODE_LANG6
+ SDL_SCANCODE_LANG7
+ SDL_SCANCODE_LANG8
+ SDL_SCANCODE_LANG9
+ SDL_SCANCODE_ALTERASE
+ SDL_SCANCODE_SYSREQ
+ SDL_SCANCODE_CANCEL
+ SDL_SCANCODE_CLEAR
+ SDL_SCANCODE_PRIOR
+ SDL_SCANCODE_RETURN2
+ SDL_SCANCODE_SEPARATOR
+ SDL_SCANCODE_OUT
+ SDL_SCANCODE_OPER
+ SDL_SCANCODE_CLEARAGAIN
+ SDL_SCANCODE_CRSEL
+ SDL_SCANCODE_EXSEL
+ SDL_SCANCODE_KP_00
+ SDL_SCANCODE_KP_000
+ SDL_SCANCODE_THOUSANDSSEPARATOR
+ SDL_SCANCODE_DECIMALSEPARATOR
+ SDL_SCANCODE_CURRENCYUNIT
+ SDL_SCANCODE_CURRENCYSUBUNIT
+ SDL_SCANCODE_KP_LEFTPAREN
+ SDL_SCANCODE_KP_RIGHTPAREN
+ SDL_SCANCODE_KP_LEFTBRACE
+ SDL_SCANCODE_KP_RIGHTBRACE
+ SDL_SCANCODE_KP_TAB
+ SDL_SCANCODE_KP_BACKSPACE
+ SDL_SCANCODE_KP_A
+ SDL_SCANCODE_KP_B
+ SDL_SCANCODE_KP_C
+ SDL_SCANCODE_KP_D
+ SDL_SCANCODE_KP_E
+ SDL_SCANCODE_KP_F
+ SDL_SCANCODE_KP_XOR
+ SDL_SCANCODE_KP_POWER
+ SDL_SCANCODE_KP_PERCENT
+ SDL_SCANCODE_KP_LESS
+ SDL_SCANCODE_KP_GREATER
+ SDL_SCANCODE_KP_AMPERSAND
+ SDL_SCANCODE_KP_DBLAMPERSAND
+ SDL_SCANCODE_KP_VERTICALBAR
+ SDL_SCANCODE_KP_DBLVERTICALBAR
+ SDL_SCANCODE_KP_COLON
+ SDL_SCANCODE_KP_HASH
+ SDL_SCANCODE_KP_SPACE
+ SDL_SCANCODE_KP_AT
+ SDL_SCANCODE_KP_EXCLAM
+ SDL_SCANCODE_KP_MEMSTORE
+ SDL_SCANCODE_KP_MEMRECALL
+ SDL_SCANCODE_KP_MEMCLEAR
+ SDL_SCANCODE_KP_MEMADD
+ SDL_SCANCODE_KP_MEMSUBTRACT
+ SDL_SCANCODE_KP_MEMMULTIPLY
+ SDL_SCANCODE_KP_MEMDIVIDE
+ SDL_SCANCODE_KP_PLUSMINUS
+ SDL_SCANCODE_KP_CLEAR
+ SDL_SCANCODE_KP_CLEARENTRY
+ SDL_SCANCODE_KP_BINARY
+ SDL_SCANCODE_KP_OCTAL
+ SDL_SCANCODE_KP_DECIMAL
+ SDL_SCANCODE_KP_HEXADECIMAL
+ SDL_SCANCODE_LCTRL
+ SDL_SCANCODE_LSHIFT
+ SDL_SCANCODE_LALT
+ SDL_SCANCODE_LGUI
+ SDL_SCANCODE_RCTRL
+ SDL_SCANCODE_RSHIFT
+ SDL_SCANCODE_RALT
+ SDL_SCANCODE_RGUI
+ SDL_SCANCODE_MODE
+ SDL_SCANCODE_AUDIONEXT
+ SDL_SCANCODE_AUDIOPREV
+ SDL_SCANCODE_AUDIOSTOP
+ SDL_SCANCODE_AUDIOPLAY
+ SDL_SCANCODE_AUDIOMUTE
+ SDL_SCANCODE_MEDIASELECT
+ SDL_SCANCODE_WWW
+ SDL_SCANCODE_MAIL
+ SDL_SCANCODE_CALCULATOR
+ SDL_SCANCODE_COMPUTER
+ SDL_SCANCODE_AC_SEARCH
+ SDL_SCANCODE_AC_HOME
+ SDL_SCANCODE_AC_BACK
+ SDL_SCANCODE_AC_FORWARD
+ SDL_SCANCODE_AC_STOP
+ SDL_SCANCODE_AC_REFRESH
+ SDL_SCANCODE_AC_BOOKMARKS
+ SDL_SCANCODE_BRIGHTNESSDOWN
+ SDL_SCANCODE_BRIGHTNESSUP
+ SDL_SCANCODE_DISPLAYSWITCH
+ SDL_SCANCODE_KBDILLUMTOGGLE
+ SDL_SCANCODE_KBDILLUMDOWN
+ SDL_SCANCODE_KBDILLUMUP
+ SDL_SCANCODE_EJECT
+ SDL_SCANCODE_SLEEP
+ SDL_SCANCODE_APP1
+ SDL_SCANCODE_APP2
+ SDL_NUM_SCANCODES
+ )
+
+(c-define-constants
+ SDL_LOG_CATEGORY_APPLICATION
+ SDL_LOG_CATEGORY_ERROR
+ SDL_LOG_CATEGORY_SYSTEM
+ SDL_LOG_CATEGORY_AUDIO
+ SDL_LOG_CATEGORY_VIDEO
+ SDL_LOG_CATEGORY_RENDER
+ SDL_LOG_CATEGORY_INPUT
+ SDL_LOG_CATEGORY_CUSTOM
+ )
+
+(c-define-constants
+ SDL_LOG_PRIORITY_VERBOSE
+ SDL_LOG_PRIORITY_DEBUG
+ SDL_LOG_PRIORITY_INFO
+ SDL_LOG_PRIORITY_WARN
+ SDL_LOG_PRIORITY_ERROR
+ SDL_LOG_PRIORITY_CRITICAL
+ )
+
+(c-define-constants
+ SDL_PIXELFORMAT_UNKNOWN
+ SDL_PIXELFORMAT_INDEX1LSB
+ SDL_PIXELFORMAT_INDEX1MSB
+ SDL_PIXELFORMAT_INDEX4LSB
+ SDL_PIXELFORMAT_INDEX4MSB
+ SDL_PIXELFORMAT_INDEX8
+ SDL_PIXELFORMAT_RGB332
+ SDL_PIXELFORMAT_RGB444
+ SDL_PIXELFORMAT_RGB555
+ SDL_PIXELFORMAT_BGR555
+ SDL_PIXELFORMAT_ARGB4444
+ SDL_PIXELFORMAT_RGBA4444
+ SDL_PIXELFORMAT_ABGR4444
+ SDL_PIXELFORMAT_BGRA4444
+ SDL_PIXELFORMAT_ARGB1555
+ SDL_PIXELFORMAT_RGBA5551
+ SDL_PIXELFORMAT_ABGR1555
+ SDL_PIXELFORMAT_BGRA5551
+ SDL_PIXELFORMAT_RGB565
+ SDL_PIXELFORMAT_BGR565
+ SDL_PIXELFORMAT_RGB24
+ SDL_PIXELFORMAT_BGR24
+ SDL_PIXELFORMAT_RGB888
+ SDL_PIXELFORMAT_RGBX8888
+ SDL_PIXELFORMAT_BGR888
+ SDL_PIXELFORMAT_BGRX8888
+ SDL_PIXELFORMAT_ARGB8888
+ SDL_PIXELFORMAT_RGBA8888
+ SDL_PIXELFORMAT_ABGR8888
+ SDL_PIXELFORMAT_BGRA8888
+ SDL_PIXELFORMAT_ARGB2101010
+ SDL_PIXELFORMAT_YV12
+ SDL_PIXELFORMAT_IYUV
+ SDL_PIXELFORMAT_YUY2
+ SDL_PIXELFORMAT_UYVY
+ SDL_PIXELFORMAT_YVYU
+ )
+
+(define SDL_PIXELTYPE
+  (c-lambda (int) int "___result = SDL_PIXELTYPE(___arg1);"))
+(define SDL_PIXELORDER
+  (c-lambda (int) int "___result = SDL_PIXELORDER(___arg1);"))
+(define SDL_PIXELLAYOUT
+  (c-lambda (int) int "___result = SDL_PIXELLAYOUT(___arg1);"))
+(define SDL_BITSPERPIXEL
+  (c-lambda (int) int "___result = SDL_BITSPERPIXEL(___arg1);"))
+(define SDL_BYTESPERPIXEL
+  (c-lambda (int) int "___result = SDL_BYTESPERPIXEL(___arg1);"))
+(define SDL_ISPIXELFORMAT_INDEXED
+  (c-lambda (int) int "___result = SDL_ISPIXELFORMAT_INDEXED(___arg1);"))
+(define SDL_ISPIXELFORMAT_ALPHA
+  (c-lambda (int) int "___result = SDL_ISPIXELFORMAT_ALPHA(___arg1);"))
+(define SDL_ISPIXELFORMAT_FOURCC
+  (c-lambda (int) int "___result = SDL_ISPIXELFORMAT_FOURCC(___arg1);"))
+
+(c-define-constants
+ SDL_PIXELTYPE_UNKNOWN
+ SDL_PIXELTYPE_INDEX1
+ SDL_PIXELTYPE_INDEX4
+ SDL_PIXELTYPE_INDEX8
+ SDL_PIXELTYPE_PACKED8
+ SDL_PIXELTYPE_PACKED16
+ SDL_PIXELTYPE_PACKED32
+ SDL_PIXELTYPE_ARRAYU8
+ SDL_PIXELTYPE_ARRAYU16
+ SDL_PIXELTYPE_ARRAYU32
+ SDL_PIXELTYPE_ARRAYF16
+ SDL_PIXELTYPE_ARRAYF32
+ )
+
+(c-define-constants
+ SDL_BITMAPORDER_NONE
+ SDL_BITMAPORDER_4321
+ SDL_BITMAPORDER_1234
+ )
+
+(c-define-constants
+ SDL_PACKEDORDER_NONE
+ SDL_PACKEDORDER_XRGB
+ SDL_PACKEDORDER_RGBX
+ SDL_PACKEDORDER_ARGB
+ SDL_PACKEDORDER_RGBA
+ SDL_PACKEDORDER_XBGR
+ SDL_PACKEDORDER_BGRX
+ SDL_PACKEDORDER_ABGR
+ SDL_PACKEDORDER_BGRA
+ )
+
+(c-define-constants
+ SDL_ARRAYORDER_NONE
+ SDL_ARRAYORDER_RGB
+ SDL_ARRAYORDER_RGBA
+ SDL_ARRAYORDER_ARGB
+ SDL_ARRAYORDER_BGR
+ SDL_ARRAYORDER_BGRA
+ SDL_ARRAYORDER_ABGR
+ )
+
+(c-define-constants
+ SDL_PACKEDLAYOUT_NONE
+ SDL_PACKEDLAYOUT_332
+ SDL_PACKEDLAYOUT_4444
+ SDL_PACKEDLAYOUT_1555
+ SDL_PACKEDLAYOUT_5551
+ SDL_PACKEDLAYOUT_565
+ SDL_PACKEDLAYOUT_8888
+ SDL_PACKEDLAYOUT_2101010
+ SDL_PACKEDLAYOUT_1010102
+ )
+
+(c-define-constants
+ SDL_POWERSTATE_UNKNOWN
+ SDL_POWERSTATE_ON_BATTERY
+ SDL_POWERSTATE_NO_BATTERY
+ SDL_POWERSTATE_CHARGING
+ SDL_POWERSTATE_CHARGED
+ )
+
+(c-define-constants
+ SDL_RENDERER_SOFTWARE
+ SDL_RENDERER_ACCELERATED
+ SDL_RENDERER_PRESENTVSYNC
+ SDL_RENDERER_TARGETTEXTURE
+ )
+
+(c-define-constants
+ SDL_FLIP_NONE
+ SDL_FLIP_HORIZONTAL
+ SDL_FLIP_VERTICAL
+ )
+
+(c-define-constants
+ SDL_SYSWM_UNKNOWN
+ SDL_SYSWM_WINDOWS
+ SDL_SYSWM_X11
+ SDL_SYSWM_DIRECTFB
+ SDL_SYSWM_COCOA
+ SDL_SYSWM_UIKIT
+ )
+
+(c-define-constants
+ SDL_TEXTUREACCESS_STATIC
+ SDL_TEXTUREACCESS_STREAMING
+ )
+
+(c-define-constants
+ SDL_TEXTUREMODULATE_NONE
+ SDL_TEXTUREMODULATE_COLOR
+ SDL_TEXTUREMODULATE_ALPHA
+ )
+
+(cond-expand
+ (sdl:threads
+  (c-define-constants
+   SDL_THREAD_PRIORITY_LOW
+   SDL_THREAD_PRIORITY_NORMAL
+   SDL_THREAD_PRIORITY_HIGH))
+ (else #!void))
+
+(c-define-constants
+ SDL_WINDOWEVENT_SHOWN
+ SDL_WINDOWEVENT_HIDDEN
+ SDL_WINDOWEVENT_EXPOSED
+ SDL_WINDOWEVENT_MOVED
+ SDL_WINDOWEVENT_RESIZED
+ SDL_WINDOWEVENT_SIZE_CHANGED
+ SDL_WINDOWEVENT_MINIMIZED
+ SDL_WINDOWEVENT_MAXIMIZED
+ SDL_WINDOWEVENT_RESTORED
+ SDL_WINDOWEVENT_ENTER
+ SDL_WINDOWEVENT_LEAVE
+ SDL_WINDOWEVENT_FOCUS_GAINED
+ SDL_WINDOWEVENT_FOCUS_LOST
+ SDL_WINDOWEVENT_CLOSE
+ )
+
+(c-define-constants
+ SDL_WINDOW_FULLSCREEN
+ SDL_WINDOW_FULLSCREEN_DESKTOP
+ SDL_WINDOW_OPENGL
+ SDL_WINDOW_SHOWN
+ SDL_WINDOW_HIDDEN
+ SDL_WINDOW_BORDERLESS
+ SDL_WINDOW_RESIZABLE
+ SDL_WINDOW_MINIMIZED
+ SDL_WINDOW_MAXIMIZED
+ SDL_WINDOW_INPUT_GRABBED
+ SDL_WINDOW_INPUT_FOCUS
+ SDL_WINDOW_MOUSE_FOCUS
+ SDL_WINDOW_FOREIGN
+ SDL_WINDOW_ALLOW_HIGHDPI
+ )
+
+(cond-expand
+ (sdl:assert
+  (c-define-constants
+   SDL_ASSERTION_RETRY
+   SDL_ASSERTION_BREAK
+   SDL_ASSERTION_ABORT
+   SDL_ASSERTION_IGNORE
+   SDL_ASSERTION_ALWAYS_IGNORE))
+ (else #!void))
+
+(c-define-constants
+ SDL_FALSE
+ SDL_TRUE
+ )
+
+
+;;------------------------------------------------------------------------------
+;;!! Structures
 
 (c-define-struct SDL_AudioCVT
                  (needed int)
@@ -45,24 +912,27 @@
                  (g unsigned-int8)
                  (b unsigned-int8))
 
-(c-define-struct SDL_ControllerAxisEvent
-                 (type unsigned-int32)
-                 (timestamp unsigned-int32)
-                 (which SDL_JoystickID)
-                 (axis unsigned-int8)
-                 (value int16))
+(cond-expand
+ (sdl:game-controller
+  (c-define-struct SDL_ControllerAxisEvent
+                   (type unsigned-int32)
+                   (timestamp unsigned-int32)
+                   (which SDL_JoystickID)
+                   (axis unsigned-int8)
+                   (value int16))
 
-(c-define-struct SDL_ControllerButtonEvent
-                 (type unsigned-int32)
-                 (timestamp unsigned-int32)
-                 (which SDL_JoystickID)
-                 (button unsigned-int8)
-                 (state unsigned-int8))
+  (c-define-struct SDL_ControllerButtonEvent
+                   (type unsigned-int32)
+                   (timestamp unsigned-int32)
+                   (which SDL_JoystickID)
+                   (button unsigned-int8)
+                   (state unsigned-int8))
 
-(c-define-struct SDL_ControllerDeviceEvent
-                 (type unsigned-int32)
-                 (timestamp unsigned-int32)
-                 (which int32))
+  (c-define-struct SDL_ControllerDeviceEvent
+                   (type unsigned-int32)
+                   (timestamp unsigned-int32)
+                   (which int32)))
+ (else #!void))
 
 (c-define-struct SDL_DisplayMode
                  (format unsigned-int32)
@@ -86,7 +956,6 @@
                  (timestamp unsigned-int32)
                  (file nonnull-char-string))
 
-#;
 (c-define-union SDL_Event
                 (type unsigned-int32)
                 (window SDL_WindowEvent)
@@ -98,12 +967,12 @@
                 (wheel SDL_MouseWheelEvent)
                 (jaxis SDL_JoyAxisEvent)
                 (jball SDL_JoyBallEvent)
-                (jhat SDL_HatEvent)
+                (jhat SDL_JoyHatEvent)
                 (jbutton SDL_JoyButtonEvent)
                 (jdevice SDL_JoyDeviceEvent)
                 (caxis SDL_ControllerAxisEvent)
                 (cbutton SDL_ControllerButtonEvent)
-                (cdevine SDL_ControllerDeviceEvent)
+                (cdevice SDL_ControllerDeviceEvent)
                 (quit SDL_QuitEvent)
                 (user SDL_UserEvent)
                 (syswm SDL_SysWMEvent)
@@ -118,130 +987,135 @@
                  (y float)
                  (pressure float))
 
-(c-define-struct SDL_HapticCondition
-                 (type unsigned-int16)
-                 (length unsigned-int32)
-                 (delay unsigned-int16)
-                 (button unsigned-int16)
-                 (interval unsigned-int16)
-                 (right_sat (array unsigned-int16))
-                 (left_sat (array unsigned-int16))
-                 (right_coeff (array int16))
-                 (left_coeff (array int16))
-                 (deadband (array unsigned-int16))
-                 (center (array int16)))
+(cond-expand
+ (sdl:haptic
+  (c-define-struct SDL_HapticCondition
+                   (type unsigned-int16)
+                   (length unsigned-int32)
+                   (delay unsigned-int16)
+                   (button unsigned-int16)
+                   (interval unsigned-int16)
+                   (right_sat (array unsigned-int16))
+                   (left_sat (array unsigned-int16))
+                   (right_coeff (array int16))
+                   (left_coeff (array int16))
+                   (deadband (array unsigned-int16))
+                   (center (array int16)))
 
-(c-define-struct SDL_HapticConstant
-                 (type unsigned-int16)
-                 (direction SDL_HapticDirection)
-                 (length unsigned-int32)
-                 (delay unsigned-int16)
-                 (button unsigned-int16)
-                 (interval unsigned-int16)
-                 (level int16)
-                 (attack_length unsigned-int16)
-                 (attack_level unsigned-int16)
-                 (fade_length unsigned-int16)
-                 (fade_level unsigned-int16))
+  (c-define-struct SDL_HapticConstant
+                   (type unsigned-int16)
+                   (direction SDL_HapticDirection)
+                   (length unsigned-int32)
+                   (delay unsigned-int16)
+                   (button unsigned-int16)
+                   (interval unsigned-int16)
+                   (level int16)
+                   (attack_length unsigned-int16)
+                   (attack_level unsigned-int16)
+                   (fade_length unsigned-int16)
+                   (fade_level unsigned-int16))
 
-(c-define-struct SDL_HapticCustom
-                 (type unsigned-int16)
-                 (direction SDL_HapticDirection)
-                 (length unsigned-int32)
-                 (delay unsigned-int16)
-                 (button unsigned-int16)
-                 (interval unsigned-int16)
-                 (channels unsigned-int8)
-                 (period unsigned-int16)
-                 (samples unsigned-int16)
-                 (data unsigned-int16*)
-                 (attack_length unsigned-int16)
-                 (attack_level unsigned-int16)
-                 (fade_length unsigned-int16)
-                 (fade_level unsigned-int16))
+  (c-define-struct SDL_HapticCustom
+                   (type unsigned-int16)
+                   (direction SDL_HapticDirection)
+                   (length unsigned-int32)
+                   (delay unsigned-int16)
+                   (button unsigned-int16)
+                   (interval unsigned-int16)
+                   (channels unsigned-int8)
+                   (period unsigned-int16)
+                   (samples unsigned-int16)
+                   (data unsigned-int16*)
+                   (attack_length unsigned-int16)
+                   (attack_level unsigned-int16)
+                   (fade_length unsigned-int16)
+                   (fade_level unsigned-int16))
 
-(c-define-struct SDL_HapticDirection
-                 (type unsigned-int8)
-                 (dir (array int32)))
+  (c-define-struct SDL_HapticDirection
+                   (type unsigned-int8)
+                   (dir (array int32)))
 
-(c-define-union SDL_HapticEffect
-                (constant SDL_HapticConstant)
-                (periodic SDL_HapticPeriodic)
-                (condition SDL_HapticCondition)
-                (ramp SDL_HapticRamp)
-                (leftright SDL_HapticLeftRight)
-                (custom SDL_HapticCustom))
+  (c-define-union SDL_HapticEffect
+                  (constant SDL_HapticConstant)
+                  (periodic SDL_HapticPeriodic)
+                  (condition SDL_HapticCondition)
+                  (ramp SDL_HapticRamp)
+                  (leftright SDL_HapticLeftRight)
+                  (custom SDL_HapticCustom))
 
-(c-define-struct SDL_HapticLeftRight
-                 (type unsigned-int16)
-                 (length unsigned-int32)
-                 (large_magnitude unsigned-int16)
-                 (small_magnitude unsigned-int16))
+  (c-define-struct SDL_HapticLeftRight
+                   (type unsigned-int16)
+                   (length unsigned-int32)
+                   (large_magnitude unsigned-int16)
+                   (small_magnitude unsigned-int16))
 
-(c-define-struct SDL_HapticPeriodic
-                 (type unsigned-int16)
-                 (direction SDL_HapticDirection)
-                 (length unsigned-int32)
-                 (delay unsigned-int16)
-                 (button unsigned-int16)
-                 (interval unsigned-int16)
-                 (period unsigned-int16)
-                 (magnitude int16)
-                 (offset int16)
-                 (phase unsigned-int16)
-                 (attack_length unsigned-int16)
-                 (attack_level unsigned-int16)
-                 (fade_length unsigned-int16)
-                 (fade_level unsigned-int16))
+  (c-define-struct SDL_HapticPeriodic
+                   (type unsigned-int16)
+                   (direction SDL_HapticDirection)
+                   (length unsigned-int32)
+                   (delay unsigned-int16)
+                   (button unsigned-int16)
+                   (interval unsigned-int16)
+                   (period unsigned-int16)
+                   (magnitude int16)
+                   (offset int16)
+                   (phase unsigned-int16)
+                   (attack_length unsigned-int16)
+                   (attack_level unsigned-int16)
+                   (fade_length unsigned-int16)
+                   (fade_level unsigned-int16))
 
-(c-define-struct SDL_HapticRamp
-                 (type unsigned-int16)
-                 (direction SDL_HapticDirection)
-                 (length unsigned-int32)
-                 (delay unsigned-int16)
-                 (button unsigned-int16)
-                 (interval unsigned-int16)
-                 (start int16)
-                 (end int16)
-                 (attack_length unsigned-int16)
-                 (attack_level unsigned-int16)
-                 (fade_length unsigned-int16)
-                 (fade_level unsigned-int16))
+  (c-define-struct SDL_HapticRamp
+                   (type unsigned-int16)
+                   (direction SDL_HapticDirection)
+                   (length unsigned-int32)
+                   (delay unsigned-int16)
+                   (button unsigned-int16)
+                   (interval unsigned-int16)
+                   (start int16)
+                   (end int16)
+                   (attack_length unsigned-int16)
+                   (attack_level unsigned-int16)
+                   (fade_length unsigned-int16)
+                   (fade_level unsigned-int16)))
+ (else #!void))
 
+(cond-expand
+ (sdl:joystick
+  (c-define-struct SDL_JoyAxisEvent
+                   (type unsigned-int32)
+                   (timestamp unsigned-int32)
+                   (which SDL_JoystickID)
+                   (axis unsigned-int8)
+                   (value int16))
 
-(c-define-struct SDL_JoyAxisEvent
-                 (type unsigned-int32)
-                 (timestamp unsigned-int32)
-                 (which SDL_JoystickID)
-                 (axis unsigned-int8)
-                 (value int16))
+  (c-define-struct SDL_JoyBallEvent
+                   (type unsigned-int32)
+                   (timestamp unsigned-int32)
+                   (which SDL_JoystickID)
+                   (ball unsigned-int8)
+                   (xrel int16)
+                   (yrel int16))
 
-(c-define-struct SDL_JoyBallEvent
-                 (type unsigned-int32)
-                 (timestamp unsigned-int32)
-                 (which SDL_JoystickID)
-                 (ball unsigned-int8)
-                 (xrel int16)
-                 (yrel int16))
+  (c-define-struct SDL_JoyButtonEvent
+                   (type unsigned-int32)
+                   (timestamp unsigned-int32)
+                   (which SDL_JoystickID)
+                   (button unsigned-int8)
+                   (state unsigned-int8))
 
-(c-define-struct SDL_JoyButtonEvent
-                 (type unsigned-int32)
-                 (timestamp unsigned-int32)
-                 (which SDL_JoystickID)
-                 (button unsigned-int8)
-                 (state unsigned-int8))
+  (c-define-struct SDL_JoyDeviceEvent
+                   (type unsigned-int32)
+                   (timestamp unsigned-int32)
+                   (which int32))
 
-(c-define-struct SDL_JoyDeviceEvent
-                 (type unsigned-int32)
-                 (timestamp unsigned-int32)
-                 (which int32))
-
-(c-define-struct SDL_JoyHatEvent
-                 (type unsigned-int32)
-                 (timestamp unsigned-int32)
-                 (which SDL_JoystickID)
-                 (hat unsigned-int8)
-                 (value unsigned-int8))
+  (c-define-struct SDL_JoyHatEvent
+                   (type unsigned-int32)
+                   (timestamp unsigned-int32)
+                   (which SDL_JoystickID)
+                   (hat unsigned-int8)
+                   (value unsigned-int8)))
+ (else #!void))
 
 (c-define-struct SDL_KeyboardEvent
                  (type unsigned-int32)
@@ -317,10 +1191,6 @@
 (c-define-struct SDL_QuitEvent
                  (type unsigned-int32)
                  (timestamp unsigned-int32))
-
-;; According to SDL2 documentation, applications shouldn't have to care
-;; about the internals of this structure, so we keep it opaque
-;; SDL_RWops
 
 (c-define-struct SDL_Rect
                  (x int)
@@ -423,14 +1293,6 @@
                  (patch unsigned-int8))
 
 
-
-
-;; Macros
-
-
-SDL_COMPILEDVERSION
-
-
 ;;------------------------------------------------------------------------------
 ;;!! Functions
 
@@ -440,11 +1302,14 @@ SDL_COMPILEDVERSION
 (define SDL_AllocFormat (c-lambda (unsigned-int32) SDL_PixelFormat* "SDL_AllocFormat"))
 (define SDL_AllocPalette (c-lambda (int) SDL_Palette* "SDL_AllocPalette"))
 (define SDL_AllocRW (c-lambda () SDL_RWops* "SDL_AllocRW"))
-(define SDL_AndroidGetActivity (c-lambda () void* "SDL_AndroidGetActivity"))
-(define SDL_AndroidGetExternalStoragePath (c-lambda () char* "SDL_AndroidGetExternalStoragePath"))
-(define SDL_AndroidGetExternalStorageState (c-lambda () int "SDL_AndroidGetExternalStorageState"))
-(define SDL_AndroidGetInternalStoragePath (c-lambda () char* "SDL_AndroidGetInternalStoragePath"))
-(define SDL_AndroidGetJNIEnv (c-lambda () void* "SDL_AndroidGetJNIEnv"))
+(cond-expand
+ (android
+  (define SDL_AndroidGetActivity (c-lambda () void* "SDL_AndroidGetActivity"))
+  (define SDL_AndroidGetExternalStoragePath (c-lambda () char* "SDL_AndroidGetExternalStoragePath"))
+  (define SDL_AndroidGetExternalStorageState (c-lambda () int "SDL_AndroidGetExternalStorageState"))
+  (define SDL_AndroidGetInternalStoragePath (c-lambda () char* "SDL_AndroidGetInternalStoragePath"))
+  (define SDL_AndroidGetJNIEnv (c-lambda () void* "SDL_AndroidGetJNIEnv")))
+ (else #!void))
 (cond-expand
  (sdl:atomic
   (define SDL_AtomicAdd (c-lambda (SDL_atomic_t* int) int "SDL_AtomicAdd"))
@@ -543,26 +1408,32 @@ SDL_COMPILEDVERSION
 (define SDL_GL_SwapWindow (c-lambda (SDL_Window*) void "SDL_GL_SwapWindow"))
 (define SDL_GL_UnbindTexture (c-lambda (SDL_Texture*) int "SDL_GL_UnbindTexture"))
 (define SDL_GL_UnloadLibrary (c-lambda () void "SDL_GL_UnloadLibrary"))
-(define SDL_GameControllerAddMapping (c-lambda (char*) int "SDL_GameControllerAddMapping"))
-(define SDL_GameControllerAddMappingsFromFile (c-lambda (char*) int "SDL_GameControllerAddMappingsFromFile"))
-(define SDL_GameControllerClose (c-lambda (SDL_GameController*) void "SDL_GameControllerClose"))
-(define SDL_GameControllerEventState (c-lambda (int) int "SDL_GameControllerEventState"))
-(define SDL_GameControllerGetAttached (c-lambda (SDL_GameController*) SDL_bool "SDL_GameControllerGetAttached"))
-(define SDL_GameControllerGetAxis (c-lambda (SDL_GameController* SDL_GameControllerAxis) int16 "SDL_GameControllerGetAxis"))
-(define SDL_GameControllerGetAxisFromString (c-lambda (char*) SDL_GameControllerAxis "SDL_GameControllerGetAxisFromString"))
-(define SDL_GameControllerGetBindForAxis (c-lambda (SDL_GameController* SDL_GameControllerAxis) SDL_GameControllerButtonBind "SDL_GameControllerGetBindForAxis"))
-(define SDL_GameControllerGetBindForButton (c-lambda (SDL_GameController* SDL_GameControllerButton) SDL_GameControllerButtonBind "SDL_GameControllerGetBindForButton"))
-(define SDL_GameControllerGetButton (c-lambda (SDL_GameController* SDL_GameControllerButton) unsigned-int8 "SDL_GameControllerGetButton"))
-(define SDL_GameControllerGetButtonFromString (c-lambda (char*) SDL_GameControllerButton "SDL_GameControllerGetButtonFromString"))
-(define SDL_GameControllerGetJoystick (c-lambda (SDL_GameController*) SDL_Joystick* "SDL_GameControllerGetJoystick"))
-(define SDL_GameControllerGetStringForAxis (c-lambda (SDL_GameControllerAxis) char* "SDL_GameControllerGetStringForAxis"))
-(define SDL_GameControllerGetStringForButton (c-lambda (SDL_GameControllerButton) char* "SDL_GameControllerGetStringForButton"))
-(define SDL_GameControllerMapping (c-lambda (SDL_GameController*) char* "SDL_GameControllerMapping"))
-;;(define SDL_GameControllerMappingForGUID (c-lambda (SDL_JoystickGUID) char* "SDL_GameControllerMappingForGUID"))
-(define SDL_GameControllerName (c-lambda (SDL_GameController*) char* "SDL_GameControllerName"))
-(define SDL_GameControllerNameForIndex (c-lambda (int) char* "SDL_GameControllerNameForIndex"))
-(define SDL_GameControllerOpen (c-lambda (int) SDL_GameController* "SDL_GameControllerOpen"))
-(define SDL_GameControllerUpdate (c-lambda () void "SDL_GameControllerUpdate"))
+(cond-expand
+ (sdl:game-controller
+  (define SDL_GameControllerAddMapping (c-lambda (char*) int "SDL_GameControllerAddMapping"))
+  (define SDL_GameControllerAddMappingsFromFile (c-lambda (char*) int "SDL_GameControllerAddMappingsFromFile"))
+  (define SDL_GameControllerClose (c-lambda (SDL_GameController*) void "SDL_GameControllerClose"))
+  (define SDL_GameControllerEventState (c-lambda (int) int "SDL_GameControllerEventState"))
+  (define SDL_GameControllerGetAttached (c-lambda (SDL_GameController*) SDL_bool "SDL_GameControllerGetAttached"))
+  (define SDL_GameControllerGetAxis (c-lambda (SDL_GameController* SDL_GameControllerAxis) int16 "SDL_GameControllerGetAxis"))
+  (define SDL_GameControllerGetAxisFromString (c-lambda (char*) SDL_GameControllerAxis "SDL_GameControllerGetAxisFromString"))
+  (define SDL_GameControllerGetBindForAxis (c-lambda (SDL_GameController* SDL_GameControllerAxis) SDL_GameControllerButtonBind "SDL_GameControllerGetBindForAxis"))
+  (define SDL_GameControllerGetBindForButton (c-lambda (SDL_GameController* SDL_GameControllerButton) SDL_GameControllerButtonBind "SDL_GameControllerGetBindForButton"))
+  (define SDL_GameControllerGetButton (c-lambda (SDL_GameController* SDL_GameControllerButton) unsigned-int8 "SDL_GameControllerGetButton"))
+  (define SDL_GameControllerGetButtonFromString (c-lambda (char*) SDL_GameControllerButton "SDL_GameControllerGetButtonFromString"))
+  (cond-expand
+   (sdl:joystick
+    (define SDL_GameControllerGetJoystick (c-lambda (SDL_GameController*) SDL_Joystick* "SDL_GameControllerGetJoystick")))
+   (else #!void))
+  (define SDL_GameControllerGetStringForAxis (c-lambda (SDL_GameControllerAxis) char* "SDL_GameControllerGetStringForAxis"))
+  (define SDL_GameControllerGetStringForButton (c-lambda (SDL_GameControllerButton) char* "SDL_GameControllerGetStringForButton"))
+  (define SDL_GameControllerMapping (c-lambda (SDL_GameController*) char* "SDL_GameControllerMapping"))
+  ;;(define SDL_GameControllerMappingForGUID (c-lambda (SDL_JoystickGUID) char* "SDL_GameControllerMappingForGUID"))
+  (define SDL_GameControllerName (c-lambda (SDL_GameController*) char* "SDL_GameControllerName"))
+  (define SDL_GameControllerNameForIndex (c-lambda (int) char* "SDL_GameControllerNameForIndex"))
+  (define SDL_GameControllerOpen (c-lambda (int) SDL_GameController* "SDL_GameControllerOpen"))
+  (define SDL_GameControllerUpdate (c-lambda () void "SDL_GameControllerUpdate")))
+ (else #!void))
 (cond-expand
  (sdl:assert
   (define SDL_GetAssertionReport (c-lambda () SDL_assert_data* "SDL_GetAssertionReport")))
@@ -662,33 +1533,39 @@ SDL_COMPILEDVERSION
 (define SDL_GetWindowSurface (c-lambda (SDL_Window*) SDL_Surface* "SDL_GetWindowSurface"))
 (define SDL_GetWindowTitle (c-lambda (SDL_Window*) char* "SDL_GetWindowTitle"))
 (define SDL_GetWindowWMInfo (c-lambda (SDL_Window* SDL_SysWMinfo*) SDL_bool "SDL_GetWindowWMInfo"))
-(define SDL_HapticClose (c-lambda (SDL_Haptic*) void "SDL_HapticClose"))
-(define SDL_HapticDestroyEffect (c-lambda (SDL_Haptic* int) void "SDL_HapticDestroyEffect"))
-(define SDL_HapticEffectSupported (c-lambda (SDL_Haptic* SDL_HapticEffect*) int "SDL_HapticEffectSupported"))
-(define SDL_HapticGetEffectStatus (c-lambda (SDL_Haptic* int) int "SDL_HapticGetEffectStatus"))
-(define SDL_HapticIndex (c-lambda (SDL_Haptic*) int "SDL_HapticIndex"))
-(define SDL_HapticName (c-lambda (int) char* "SDL_HapticName"))
-(define SDL_HapticNewEffect (c-lambda (SDL_Haptic* SDL_HapticEffect*) int "SDL_HapticNewEffect"))
-(define SDL_HapticNumAxes (c-lambda (SDL_Haptic*) int "SDL_HapticNumAxes"))
-(define SDL_HapticNumEffects (c-lambda (SDL_Haptic*) int "SDL_HapticNumEffects"))
-(define SDL_HapticNumEffectsPlaying (c-lambda (SDL_Haptic*) int "SDL_HapticNumEffectsPlaying"))
-(define SDL_HapticOpen (c-lambda (int) SDL_Haptic* "SDL_HapticOpen"))
-(define SDL_HapticOpenFromJoystick (c-lambda (SDL_Joystick*) SDL_Haptic* "SDL_HapticOpenFromJoystick"))
-(define SDL_HapticOpenFromMouse (c-lambda () SDL_Haptic* "SDL_HapticOpenFromMouse"))
-(define SDL_HapticOpened (c-lambda (int) int "SDL_HapticOpened"))
-(define SDL_HapticPause (c-lambda (SDL_Haptic*) int "SDL_HapticPause"))
-(define SDL_HapticQuery (c-lambda (SDL_Haptic*) unsigned-int "SDL_HapticQuery"))
-(define SDL_HapticRumbleInit (c-lambda (SDL_Haptic*) int "SDL_HapticRumbleInit"))
-(define SDL_HapticRumblePlay (c-lambda (SDL_Haptic* float unsigned-int32) int "SDL_HapticRumblePlay"))
-(define SDL_HapticRumbleStop (c-lambda (SDL_Haptic*) int "SDL_HapticRumbleStop"))
-(define SDL_HapticRumbleSupported (c-lambda (SDL_Haptic*) int "SDL_HapticRumbleSupported"))
-(define SDL_HapticRunEffect (c-lambda (SDL_Haptic* int unsigned-int32) int "SDL_HapticRunEffect"))
-(define SDL_HapticSetAutocenter (c-lambda (SDL_Haptic* int) int "SDL_HapticSetAutocenter"))
-(define SDL_HapticSetGain (c-lambda (SDL_Haptic* int) int "SDL_HapticSetGain"))
-(define SDL_HapticStopAll (c-lambda (SDL_Haptic*) int "SDL_HapticStopAll"))
-(define SDL_HapticStopEffect (c-lambda (SDL_Haptic* int) int "SDL_HapticStopEffect"))
-(define SDL_HapticUnpause (c-lambda (SDL_Haptic*) int "SDL_HapticUnpause"))
-(define SDL_HapticUpdateEffect (c-lambda (SDL_Haptic* int SDL_HapticEffect*) int "SDL_HapticUpdateEffect"))
+(cond-expand
+ (sdl:haptic
+  (define SDL_HapticClose (c-lambda (SDL_Haptic*) void "SDL_HapticClose"))
+  (define SDL_HapticDestroyEffect (c-lambda (SDL_Haptic* int) void "SDL_HapticDestroyEffect"))
+  (define SDL_HapticEffectSupported (c-lambda (SDL_Haptic* SDL_HapticEffect*) int "SDL_HapticEffectSupported"))
+  (define SDL_HapticGetEffectStatus (c-lambda (SDL_Haptic* int) int "SDL_HapticGetEffectStatus"))
+  (define SDL_HapticIndex (c-lambda (SDL_Haptic*) int "SDL_HapticIndex"))
+  (define SDL_HapticName (c-lambda (int) char* "SDL_HapticName"))
+  (define SDL_HapticNewEffect (c-lambda (SDL_Haptic* SDL_HapticEffect*) int "SDL_HapticNewEffect"))
+  (define SDL_HapticNumAxes (c-lambda (SDL_Haptic*) int "SDL_HapticNumAxes"))
+  (define SDL_HapticNumEffects (c-lambda (SDL_Haptic*) int "SDL_HapticNumEffects"))
+  (define SDL_HapticNumEffectsPlaying (c-lambda (SDL_Haptic*) int "SDL_HapticNumEffectsPlaying"))
+  (define SDL_HapticOpen (c-lambda (int) SDL_Haptic* "SDL_HapticOpen"))
+  (cond-expand
+   (sdl:joystick
+    (define SDL_HapticOpenFromJoystick (c-lambda (SDL_Joystick*) SDL_Haptic* "SDL_HapticOpenFromJoystick")))
+   (else #!void))
+  (define SDL_HapticOpenFromMouse (c-lambda () SDL_Haptic* "SDL_HapticOpenFromMouse"))
+  (define SDL_HapticOpened (c-lambda (int) int "SDL_HapticOpened"))
+  (define SDL_HapticPause (c-lambda (SDL_Haptic*) int "SDL_HapticPause"))
+  (define SDL_HapticQuery (c-lambda (SDL_Haptic*) unsigned-int "SDL_HapticQuery"))
+  (define SDL_HapticRumbleInit (c-lambda (SDL_Haptic*) int "SDL_HapticRumbleInit"))
+  (define SDL_HapticRumblePlay (c-lambda (SDL_Haptic* float unsigned-int32) int "SDL_HapticRumblePlay"))
+  (define SDL_HapticRumbleStop (c-lambda (SDL_Haptic*) int "SDL_HapticRumbleStop"))
+  (define SDL_HapticRumbleSupported (c-lambda (SDL_Haptic*) int "SDL_HapticRumbleSupported"))
+  (define SDL_HapticRunEffect (c-lambda (SDL_Haptic* int unsigned-int32) int "SDL_HapticRunEffect"))
+  (define SDL_HapticSetAutocenter (c-lambda (SDL_Haptic* int) int "SDL_HapticSetAutocenter"))
+  (define SDL_HapticSetGain (c-lambda (SDL_Haptic* int) int "SDL_HapticSetGain"))
+  (define SDL_HapticStopAll (c-lambda (SDL_Haptic*) int "SDL_HapticStopAll"))
+  (define SDL_HapticStopEffect (c-lambda (SDL_Haptic* int) int "SDL_HapticStopEffect"))
+  (define SDL_HapticUnpause (c-lambda (SDL_Haptic*) int "SDL_HapticUnpause"))
+  (define SDL_HapticUpdateEffect (c-lambda (SDL_Haptic* int SDL_HapticEffect*) int "SDL_HapticUpdateEffect")))
+ (else #!void))
 (define SDL_Has3DNow (c-lambda () SDL_bool "SDL_Has3DNow"))
 (define SDL_HasAltiVec (c-lambda () SDL_bool "SDL_HasAltiVec"))
 (define SDL_HasClipboardText (c-lambda () SDL_bool "SDL_HasClipboardText"))
@@ -708,31 +1585,37 @@ SDL_COMPILEDVERSION
 (define SDL_InitSubSystem (c-lambda (unsigned-int32) int "SDL_InitSubSystem"))
 (define SDL_IntersectRect (c-lambda (SDL_Rect* SDL_Rect* SDL_Rect*) SDL_bool "SDL_IntersectRect"))
 (define SDL_IntersectRectAndLine (c-lambda (SDL_Rect* int* int* int* int*) SDL_bool "SDL_IntersectRectAndLine"))
-(define SDL_IsGameController (c-lambda (int) SDL_bool "SDL_IsGameController"))
+(cond-expand
+ (sdl:game-controller
+  (define SDL_IsGameController (c-lambda (int) SDL_bool "SDL_IsGameController")))
+ (else #!void))
 (define SDL_IsScreenKeyboardShown (c-lambda (SDL_Window*) SDL_bool "SDL_IsScreenKeyboardShown"))
 (define SDL_IsScreenSaverEnabled (c-lambda () SDL_bool "SDL_IsScreenSaverEnabled"))
 (define SDL_IsTextInputActive (c-lambda () SDL_bool "SDL_IsTextInputActive"))
-(define SDL_JoystickClose (c-lambda (SDL_Joystick*) void "SDL_JoystickClose"))
-(define SDL_JoystickEventState (c-lambda (int) int "SDL_JoystickEventState"))
-(define SDL_JoystickGetAttached (c-lambda (SDL_Joystick*) SDL_bool "SDL_JoystickGetAttached"))
-(define SDL_JoystickGetAxis (c-lambda (SDL_Joystick* int) int16 "SDL_JoystickGetAxis"))
-(define SDL_JoystickGetBall (c-lambda (SDL_Joystick* int int* int*) int "SDL_JoystickGetBall"))
-(define SDL_JoystickGetButton (c-lambda (SDL_Joystick* int) unsigned-int8 "SDL_JoystickGetButton"))
-;; (define SDL_JoystickGetDeviceGUID (c-lambda (int) SDL_JoystickGUID "SDL_JoystickGetDeviceGUID"))
-;; (define SDL_JoystickGetGUID (c-lambda (SDL_Joystick*) SDL_JoystickGUID "SDL_JoystickGetGUID"))
-;; (define SDL_JoystickGetGUIDFromString (c-lambda (char*) SDL_JoystickGUID "SDL_JoystickGetGUIDFromString"))
-;; (define SDL_JoystickGetGUIDString (c-lambda (SDL_JoystickGUID char* int) void "SDL_JoystickGetGUIDString"))
-(define SDL_JoystickGetHat (c-lambda (SDL_Joystick* int) unsigned-int8 "SDL_JoystickGetHat"))
-(define SDL_JoystickInstanceID (c-lambda (SDL_Joystick*) SDL_JoystickID "SDL_JoystickInstanceID"))
-(define SDL_JoystickIsHaptic (c-lambda (SDL_Joystick*) int "SDL_JoystickIsHaptic"))
-(define SDL_JoystickName (c-lambda (SDL_Joystick*) char* "SDL_JoystickName"))
-(define SDL_JoystickNameForIndex (c-lambda (int) char* "SDL_JoystickNameForIndex"))
-(define SDL_JoystickNumAxes (c-lambda (SDL_Joystick*) int "SDL_JoystickNumAxes"))
-(define SDL_JoystickNumBalls (c-lambda (SDL_Joystick*) int "SDL_JoystickNumBalls"))
-(define SDL_JoystickNumButtons (c-lambda (SDL_Joystick*) int "SDL_JoystickNumButtons"))
-(define SDL_JoystickNumHats (c-lambda (SDL_Joystick*) int "SDL_JoystickNumHats"))
-(define SDL_JoystickOpen (c-lambda (int) SDL_Joystick* "SDL_JoystickOpen"))
-(define SDL_JoystickUpdate (c-lambda () void "SDL_JoystickUpdate"))
+(cond-expand
+ (sdl:joystick
+  (define SDL_JoystickClose (c-lambda (SDL_Joystick*) void "SDL_JoystickClose"))
+  (define SDL_JoystickEventState (c-lambda (int) int "SDL_JoystickEventState"))
+  (define SDL_JoystickGetAttached (c-lambda (SDL_Joystick*) SDL_bool "SDL_JoystickGetAttached"))
+  (define SDL_JoystickGetAxis (c-lambda (SDL_Joystick* int) int16 "SDL_JoystickGetAxis"))
+  (define SDL_JoystickGetBall (c-lambda (SDL_Joystick* int int* int*) int "SDL_JoystickGetBall"))
+  (define SDL_JoystickGetButton (c-lambda (SDL_Joystick* int) unsigned-int8 "SDL_JoystickGetButton"))
+  ;; (define SDL_JoystickGetDeviceGUID (c-lambda (int) SDL_JoystickGUID "SDL_JoystickGetDeviceGUID"))
+  ;; (define SDL_JoystickGetGUID (c-lambda (SDL_Joystick*) SDL_JoystickGUID "SDL_JoystickGetGUID"))
+  ;; (define SDL_JoystickGetGUIDFromString (c-lambda (char*) SDL_JoystickGUID "SDL_JoystickGetGUIDFromString"))
+  ;; (define SDL_JoystickGetGUIDString (c-lambda (SDL_JoystickGUID char* int) void "SDL_JoystickGetGUIDString"))
+  (define SDL_JoystickGetHat (c-lambda (SDL_Joystick* int) unsigned-int8 "SDL_JoystickGetHat"))
+  (define SDL_JoystickInstanceID (c-lambda (SDL_Joystick*) SDL_JoystickID "SDL_JoystickInstanceID"))
+  (define SDL_JoystickIsHaptic (c-lambda (SDL_Joystick*) int "SDL_JoystickIsHaptic"))
+  (define SDL_JoystickName (c-lambda (SDL_Joystick*) char* "SDL_JoystickName"))
+  (define SDL_JoystickNameForIndex (c-lambda (int) char* "SDL_JoystickNameForIndex"))
+  (define SDL_JoystickNumAxes (c-lambda (SDL_Joystick*) int "SDL_JoystickNumAxes"))
+  (define SDL_JoystickNumBalls (c-lambda (SDL_Joystick*) int "SDL_JoystickNumBalls"))
+  (define SDL_JoystickNumButtons (c-lambda (SDL_Joystick*) int "SDL_JoystickNumButtons"))
+  (define SDL_JoystickNumHats (c-lambda (SDL_Joystick*) int "SDL_JoystickNumHats"))
+  (define SDL_JoystickOpen (c-lambda (int) SDL_Joystick* "SDL_JoystickOpen"))
+  (define SDL_JoystickUpdate (c-lambda () void "SDL_JoystickUpdate")))
+ (else #!void))
 (define SDL_LoadBMP (c-lambda (char*) SDL_Surface* "SDL_LoadBMP"))
 (define SDL_LoadBMP_RW (c-lambda (SDL_RWops* int) SDL_Surface* "SDL_LoadBMP_RW"))
 (define SDL_LoadDollarTemplates (c-lambda (SDL_TouchID SDL_RWops*) int "SDL_LoadDollarTemplates"))
@@ -772,7 +1655,10 @@ SDL_COMPILEDVERSION
 (define SDL_MostSignificantBitIndex32 (c-lambda (unsigned-int32) int "SDL_MostSignificantBitIndex32"))
 (define SDL_MouseIsHaptic (c-lambda () int "SDL_MouseIsHaptic"))
 (define SDL_NumHaptics (c-lambda () int "SDL_NumHaptics"))
-(define SDL_NumJoysticks (c-lambda () int "SDL_NumJoysticks"))
+(cond-expand
+ (sdl:joystick
+  (define SDL_NumJoysticks (c-lambda () int "SDL_NumJoysticks")))
+ (else #!void))
 (define SDL_OpenAudio (c-lambda (SDL_AudioSpec* SDL_AudioSpec*) int "SDL_OpenAudio"))
 (define SDL_OpenAudioDevice (c-lambda (char* int SDL_AudioSpec* SDL_AudioSpec* int) SDL_AudioDeviceID "SDL_OpenAudioDevice"))
 (define SDL_PauseAudio (c-lambda (int) void "SDL_PauseAudio"))

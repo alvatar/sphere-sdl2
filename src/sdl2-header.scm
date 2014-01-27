@@ -72,14 +72,11 @@ end-of-string
 (c-define-type SDL_SystemCursor int) ; enum
 (c-define-type SDL_Texture (struct "SDL_Texture"))
 (c-define-type SDL_Texture* (pointer SDL_Texture))
-(cond-expand
- (sdl:threads
-  (c-define-type SDL_Thread (struct "SDL_Thread"))
-  (c-define-type SDL_Thread* (pointer SDL_Thread))
-  (c-define-type SDL_threadID unsigned-long)
-  (c-define-type SDL_ThreadPriority int) ; enum
-  (sdl:threads (c-define-type SDL_TLSID unsigned-int)))
- (else #!void))
+(c-define-type SDL_Thread (struct "SDL_Thread"))
+(c-define-type SDL_Thread* (pointer SDL_Thread))
+(c-define-type SDL_threadID unsigned-long)
+(c-define-type SDL_ThreadPriority int) ; enum
+(c-define-type SDL_TLSID unsigned-int)
 (c-define-type SDL_TimerID int)
 (c-define-type SDL_TouchID int64)
 (c-define-type SDL_Window (struct "SDL_Window"))
@@ -131,14 +128,8 @@ end-of-string
 (c-define-type* (struct SDL_TouchFingerEvent))
 (c-define-type* (struct SDL_UserEvent))
 (c-define-type* (struct SDL_WindowEvent))
-(cond-expand
- (sdl:assert
-  (c-define-type* (struct SDL_assert_data)))
- (else #!void))
-(cond-expand
- (sdl:atomic
-  (c-define-type* (struct SDL_atomic_t)))
- (else #!void))
+(c-define-type* (struct SDL_assert_data))
+;;(c-define-type* (struct SDL_atomic_t))
 (c-define-type* (struct SDL_version))
 
 (c-define-type SDL_EventFilter (function (void* SDL_Event) int))
@@ -147,7 +138,4 @@ end-of-string
 (c-define-type SDL_LogOutputFunction (function (void* int SDL_LogPriority nonnull-char-string) void))
 (c-define-type SDL_LogOutputFunction* (pointer SDL_LogOutputFunction))
 (c-define-type SDL_TimerCallback (function (unsigned-int32 void*) unsigned-int32))
-(cond-expand
- (sdl:threads
-  (c-define-type SDL_ThreadFunction (function (void*) int)))
- (else #!void))
+(c-define-type SDL_ThreadFunction (function (void*) int))
