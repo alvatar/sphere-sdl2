@@ -973,31 +973,6 @@
                  (timestamp unsigned-int32)
                  (file nonnull-char-string))
 
-(c-define-union SDL_Event
-                (type unsigned-int32)
-                (window SDL_WindowEvent)
-                (key SDL_KeyboardEvent)
-                (edit SDL_TextEditingEvent)
-                (text SDL_TextInputEvent)
-                (motion SDL_MouseMotionEvent)
-                (button SDL_MouseButtonEvent)
-                (wheel SDL_MouseWheelEvent)
-                (jaxis SDL_JoyAxisEvent)
-                (jball SDL_JoyBallEvent)
-                (jhat SDL_JoyHatEvent)
-                (jbutton SDL_JoyButtonEvent)
-                (jdevice SDL_JoyDeviceEvent)
-                (caxis SDL_ControllerAxisEvent)
-                (cbutton SDL_ControllerButtonEvent)
-                (cdevice SDL_ControllerDeviceEvent)
-                (quit SDL_QuitEvent)
-                (user SDL_UserEvent)
-                (syswm SDL_SysWMEvent)
-                (tfinger SDL_TouchFingerEvent)
-                (mgesture SDL_MultiGestureEvent)
-                (dgesture SDL_DollarGestureEvent)
-                (drop SDL_DropEvent))
-
 (c-define-struct SDL_Finger
                  (id SDL_FingerID)
                  (x float)
@@ -1134,6 +1109,12 @@
                    (value unsigned-int8)))
  (else #!void))
 
+
+;; Needs to be defined before SDL_KeyboardEvent
+(c-define-struct SDL_Keysym
+                 (scancode SDL_Scancode)
+                 (sym SDL_Keycode)
+                 (mod unsigned-int16))
 (c-define-struct SDL_KeyboardEvent
                  (type unsigned-int32)
                  (timestamp unsigned-int32)
@@ -1141,11 +1122,6 @@
                  (state unsigned-int8)
                  (repeat unsigned-int8)
                  (keysym SDL_Keysym))
-
-(c-define-struct SDL_Keysym
-                 (scancode SDL_Scancode)
-                 (sym SDL_Keycode)
-                 (mod unsigned-int16))
 
 (c-define-struct SDL_MouseButtonEvent
                  (type unsigned-int32)
@@ -1187,20 +1163,6 @@
                  (y float)
                  (numFingers unsigned-int16))
 
-(c-define-struct SDL_Palette
-                 (ncolors int)
-                 (colors SDL_Color*))
-
-(c-define-struct SDL_PixelFormat
-                 (format unsigned-int32)
-                 (palette SDL_Palette*)
-                 (BitsPerPixel unsigned-int8)
-                 (BytesPerPixel unsigned-int8)
-                 (Rmask unsigned-int32)
-                 (Gmask unsigned-int32)
-                 (Bmask unsigned-int32)
-                 (Amask unsigned-int32))
-
 (c-define-struct SDL_Point
                  (x int)
                  (y int))
@@ -1223,28 +1185,10 @@
                  (max_texture_width int)
                  (max_texture_height int))
 
-(c-define-struct SDL_Surface
-                 (format SDL_PixelFormat*)
-                 (w int)
-                 (h int)
-                 (pitch int)
-                 (pixels void*)
-                 (userdata void*)
-                 (clip_rect SDL_Rect)
-                 (refcount int))
-
 (c-define-struct SDL_SysWMEvent
                  (type unsigned-int32)
                  (timestamp unsigned-int32)
                  (msg SDL_SysWMmsg*))
-
-(c-define-struct SDL_SysWMinfo
-                 (version SDL_version)
-                 (subsystem int))
-
-(c-define-struct SDL_SysWMmsg
-                 (version SDL_version)
-                 (subsystem int))
 
 (c-define-struct SDL_TextEditingEvent
                  (type unsigned-int32)
@@ -1308,6 +1252,67 @@
                  (major unsigned-int8)
                  (minor unsigned-int8)
                  (patch unsigned-int8))
+
+
+;;------------------------------------------------------------------------------
+;;!! Composite structures (need to be defined after previous ones)
+
+(c-define-union SDL_Event
+                (type unsigned-int32)
+                (window SDL_WindowEvent)
+                (key SDL_KeyboardEvent)
+                (edit SDL_TextEditingEvent)
+                (text SDL_TextInputEvent)
+                (motion SDL_MouseMotionEvent)
+                (button SDL_MouseButtonEvent)
+                (wheel SDL_MouseWheelEvent)
+                (jaxis SDL_JoyAxisEvent)
+                (jball SDL_JoyBallEvent)
+                (jhat SDL_JoyHatEvent)
+                (jbutton SDL_JoyButtonEvent)
+                (jdevice SDL_JoyDeviceEvent)
+                (caxis SDL_ControllerAxisEvent)
+                (cbutton SDL_ControllerButtonEvent)
+                (cdevice SDL_ControllerDeviceEvent)
+                (quit SDL_QuitEvent)
+                (user SDL_UserEvent)
+                (syswm SDL_SysWMEvent)
+                (tfinger SDL_TouchFingerEvent)
+                (mgesture SDL_MultiGestureEvent)
+                (dgesture SDL_DollarGestureEvent)
+                (drop SDL_DropEvent))
+
+(c-define-struct SDL_Palette
+                 (ncolors int)
+                 (colors SDL_Color*))
+
+(c-define-struct SDL_PixelFormat
+                 (format unsigned-int32)
+                 (palette SDL_Palette*)
+                 (BitsPerPixel unsigned-int8)
+                 (BytesPerPixel unsigned-int8)
+                 (Rmask unsigned-int32)
+                 (Gmask unsigned-int32)
+                 (Bmask unsigned-int32)
+                 (Amask unsigned-int32))
+
+(c-define-struct SDL_Surface
+                 (format SDL_PixelFormat*)
+                 (w int)
+                 (h int)
+                 (pitch int)
+                 (pixels void*)
+                 (userdata void*)
+                 (clip_rect SDL_Rect)
+                 (refcount int))
+
+(c-define-struct SDL_SysWMinfo
+                 (version SDL_version)
+                 (subsystem int))
+
+(c-define-struct SDL_SysWMmsg
+                 (version SDL_version)
+                 (subsystem int))
 
 
 ;;------------------------------------------------------------------------------
