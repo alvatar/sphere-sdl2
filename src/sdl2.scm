@@ -1701,6 +1701,7 @@
 (define SDL_RWclose (c-lambda (SDL_RWops*) int "SDL_RWclose"))
 (define SDL_RWread (c-lambda (SDL_RWops* void* size-t size-t) size-t "SDL_RWread"))
 (define SDL_RWseek (c-lambda (SDL_RWops* int64 int) int64 "SDL_RWseek"))
+(define SDL_RWsize (c-lambda (SDL_RWops*) size_t "SDL_RWsize"))
 (define SDL_RWtell (c-lambda (SDL_RWops*) int64 "SDL_RWtell"))
 (define SDL_RWwrite (c-lambda (SDL_RWops* void* size-t size-t) size-t "SDL_RWwrite"))
 (define SDL_RaiseWindow (c-lambda (SDL_Window*) void "SDL_RaiseWindow"))
