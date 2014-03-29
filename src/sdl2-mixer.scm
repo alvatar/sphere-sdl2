@@ -18,6 +18,9 @@
 (c-define-type Mix_Music (struct "Mix_Music"))
 (c-define-type Mix_Music* (pointer Mix_Music))
 
+(define Mix_CloseAudio
+  (c-lambda () void "Mix_CloseAudio"))
+
 (define Mix_FreeChunk
   (c-lambda (Mix_Chunk*) void "Mix_FreeChunk"))
 
@@ -30,14 +33,14 @@
 (define Mix_FreeMusic
   (c-lambda (Mix_Music*) void "Mix_FreeMusic"))
 
-(define Mix_Init
-  (c-lambda (int) int "Mix_Init"))
-
 (define Mix_GetError
   (c-lambda () char-string "Mix_GetError"))
 
 (define Mix_HaltMusic
   (c-lambda () int "Mix_HaltMusic"))
+
+(define Mix_Init
+  (c-lambda (int) int "Mix_Init"))
 
 (define Mix_LoadMUS
   (c-lambda (char-string) Mix_Music* "Mix_LoadMUS"))
