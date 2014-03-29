@@ -1,8 +1,8 @@
 (define modules
   '(sdl2
-    ;sdl2-image
-    ;sdl2-mixer
-    ;sdl2-ttf
+    sdl2-image
+    sdl2-mixer
+    sdl2-ttf
     ))
 
 (define-task compile ()
