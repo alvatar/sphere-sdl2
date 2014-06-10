@@ -6,6 +6,9 @@
     ))
 
 (define-task compile ()
+  ;; This fixes and issue in OSX: pkg-config not finding Gl
+  (if (eq? (sake#host-platform) 'osx)
+      (setenv "PKG_CONFIG_PATH" "/opt/X11/lib/pkgconfig/"))
   (for-each (lambda (m) (sake#compile-module m compiler-options: '(debug))) modules)
   (for-each sake#compile-module modules))
 
