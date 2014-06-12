@@ -829,6 +829,7 @@
 (c-define-constants
  SDL_TEXTUREACCESS_STATIC
  SDL_TEXTUREACCESS_STREAMING
+ SDL_TEXTUREACCESS_TARGET
  )
 
 (c-define-constants
@@ -973,6 +974,31 @@
                  (timestamp unsigned-int32)
                  (file nonnull-char-string))
 
+(c-define-union SDL_Event
+                (type unsigned-int32)
+                (window (struct SDL_WindowEvent))
+                (key (struct SDL_KeyboardEvent))
+                (edit (struct SDL_TextEditingEvent))
+                (text (struct SDL_TextInputEvent))
+                (motion (struct SDL_MouseMotionEvent))
+                (button (struct SDL_MouseButtonEvent))
+                (wheel (struct SDL_MouseWheelEvent))
+                (jaxis (struct SDL_JoyAxisEvent))
+                (jball (struct SDL_JoyBallEvent))
+                (jhat (struct SDL_JoyHatEvent))
+                (jbutton (struct SDL_JoyButtonEvent))
+                (jdevice (struct SDL_JoyDeviceEvent))
+                (caxis (struct SDL_ControllerAxisEvent))
+                (cbutton (struct SDL_ControllerButtonEvent))
+                (cdevice (struct SDL_ControllerDeviceEvent))
+                (quit (struct SDL_QuitEvent))
+                (user (struct SDL_UserEvent))
+                (syswm (struct SDL_SysWMEvent))
+                (tfinger (struct SDL_TouchFingerEvent))
+                (mgesture (struct SDL_MultiGestureEvent))
+                (dgesture (struct SDL_DollarGestureEvent))
+                (drop (struct SDL_DropEvent)))
+
 (c-define-struct SDL_Finger
                  (id SDL_FingerID)
                  (x float)
@@ -996,7 +1022,7 @@
 
   (c-define-struct SDL_HapticConstant
                    (type unsigned-int16)
-                   (direction SDL_HapticDirection)
+                   (direction (struct SDL_HapticDirection))
                    (length unsigned-int32)
                    (delay unsigned-int16)
                    (button unsigned-int16)
@@ -1009,7 +1035,7 @@
 
   (c-define-struct SDL_HapticCustom
                    (type unsigned-int16)
-                   (direction SDL_HapticDirection)
+                   (direction (struct SDL_HapticDirection))
                    (length unsigned-int32)
                    (delay unsigned-int16)
                    (button unsigned-int16)
@@ -1028,12 +1054,12 @@
                    (dir (array int32)))
 
   (c-define-union SDL_HapticEffect
-                  (constant SDL_HapticConstant)
-                  (periodic SDL_HapticPeriodic)
-                  (condition SDL_HapticCondition)
-                  (ramp SDL_HapticRamp)
-                  (leftright SDL_HapticLeftRight)
-                  (custom SDL_HapticCustom))
+                  (constant (struct SDL_HapticConstant))
+                  (periodic (struct SDL_HapticPeriodic))
+                  (condition (struct SDL_HapticCondition))
+                  (ramp (struct SDL_HapticRamp))
+                  (leftright (struct SDL_HapticLeftRight))
+                  (custom (struct SDL_HapticCustom)))
 
   (c-define-struct SDL_HapticLeftRight
                    (type unsigned-int16)
@@ -1043,7 +1069,7 @@
 
   (c-define-struct SDL_HapticPeriodic
                    (type unsigned-int16)
-                   (direction SDL_HapticDirection)
+                   (direction (struct SDL_HapticDirection))
                    (length unsigned-int32)
                    (delay unsigned-int16)
                    (button unsigned-int16)
@@ -1059,7 +1085,7 @@
 
   (c-define-struct SDL_HapticRamp
                    (type unsigned-int16)
-                   (direction SDL_HapticDirection)
+                   (direction (struct SDL_HapticDirection))
                    (length unsigned-int32)
                    (delay unsigned-int16)
                    (button unsigned-int16)
@@ -1121,7 +1147,7 @@
                  (windowID unsigned-int32)
                  (state unsigned-int8)
                  (repeat unsigned-int8)
-                 (keysym SDL_Keysym))
+                 (keysym (struct SDL_Keysym)))
 
 (c-define-struct SDL_MouseButtonEvent
                  (type unsigned-int32)
@@ -1130,7 +1156,7 @@
                  (which unsigned-int32)
                  (button unsigned-int8)
                  (state unsigned-int8)
-                 ;(clicks unsigned-int8) SDL 2.0.2
+                 (clicks unsigned-int8)
                  (x int)
                  (y int))
 
@@ -1163,6 +1189,20 @@
                  (y float)
                  (numFingers unsigned-int16))
 
+(c-define-struct SDL_Palette
+                 (ncolors int)
+                 (colors SDL_Color*))
+
+(c-define-struct SDL_PixelFormat
+                 (format unsigned-int32)
+                 (palette SDL_Palette*)
+                 (BitsPerPixel unsigned-int8)
+                 (BytesPerPixel unsigned-int8)
+                 (Rmask unsigned-int32)
+                 (Gmask unsigned-int32)
+                 (Bmask unsigned-int32)
+                 (Amask unsigned-int32))
+
 (c-define-struct SDL_Point
                  (x int)
                  (y int))
@@ -1185,10 +1225,28 @@
                  (max_texture_width int)
                  (max_texture_height int))
 
+(c-define-struct SDL_Surface
+                 (format SDL_PixelFormat*)
+                 (w int)
+                 (h int)
+                 (pitch int)
+                 (pixels void*)
+                 (userdata void*)
+                 (clip_rect (struct SDL_Rect))
+                 (refcount int))
+
 (c-define-struct SDL_SysWMEvent
                  (type unsigned-int32)
                  (timestamp unsigned-int32)
                  (msg SDL_SysWMmsg*))
+
+(c-define-struct SDL_SysWMinfo
+                 (version (struct SDL_version))
+                 (subsystem int))
+
+(c-define-struct SDL_SysWMmsg
+                 (version (struct SDL_version))
+                 (subsystem int))
 
 (c-define-struct SDL_TextEditingEvent
                  (type unsigned-int32)
@@ -1252,68 +1310,6 @@
                  (major unsigned-int8)
                  (minor unsigned-int8)
                  (patch unsigned-int8))
-
-
-;;------------------------------------------------------------------------------
-;;!! Composite structures (need to be defined after previous ones)
-
-(c-define-union SDL_Event
-                (type unsigned-int32)
-                (window SDL_WindowEvent)
-                (key SDL_KeyboardEvent)
-                (edit SDL_TextEditingEvent)
-                (text SDL_TextInputEvent)
-                (motion SDL_MouseMotionEvent)
-                (button SDL_MouseButtonEvent)
-                (wheel SDL_MouseWheelEvent)
-                (jaxis SDL_JoyAxisEvent)
-                (jball SDL_JoyBallEvent)
-                (jhat SDL_JoyHatEvent)
-                (jbutton SDL_JoyButtonEvent)
-                (jdevice SDL_JoyDeviceEvent)
-                (caxis SDL_ControllerAxisEvent)
-                (cbutton SDL_ControllerButtonEvent)
-                (cdevice SDL_ControllerDeviceEvent)
-                (quit SDL_QuitEvent)
-                (user SDL_UserEvent)
-                (syswm SDL_SysWMEvent)
-                (tfinger SDL_TouchFingerEvent)
-                (mgesture SDL_MultiGestureEvent)
-                (dgesture SDL_DollarGestureEvent)
-                (drop SDL_DropEvent))
-
-(c-define-struct SDL_Palette
-                 (ncolors int)
-                 (colors SDL_Color*))
-
-(c-define-struct SDL_PixelFormat
-                 (format unsigned-int32)
-                 (palette SDL_Palette*)
-                 (BitsPerPixel unsigned-int8)
-                 (BytesPerPixel unsigned-int8)
-                 (Rmask unsigned-int32)
-                 (Gmask unsigned-int32)
-                 (Bmask unsigned-int32)
-                 (Amask unsigned-int32))
-
-(c-define-struct SDL_Surface
-                 (format SDL_PixelFormat*)
-                 (w int)
-                 (h int)
-                 (pitch int)
-                 (pixels void*)
-                 (userdata void*)
-                 (clip_rect SDL_Rect)
-                 (refcount int))
-
-(c-define-struct SDL_SysWMinfo
-                 (version SDL_version)
-                 (subsystem int))
-
-(c-define-struct SDL_SysWMmsg
-                 (version SDL_version)
-                 (subsystem int))
-
 
 ;;------------------------------------------------------------------------------
 ;;!! Functions
@@ -1590,6 +1586,7 @@
  (else #!void))
 (define SDL_Has3DNow (c-lambda () SDL_bool "SDL_Has3DNow"))
 (define SDL_HasAltiVec (c-lambda () SDL_bool "SDL_HasAltiVec"))
+(define SDL_HasAVX (c-lambda () SDL_bool "SDL_HasAVX"))
 (define SDL_HasClipboardText (c-lambda () SDL_bool "SDL_HasClipboardText"))
 (define SDL_HasEvent (c-lambda (unsigned-int32) SDL_bool "SDL_HasEvent"))
 (define SDL_HasEvents (c-lambda (unsigned-int32 unsigned-int32) SDL_bool "SDL_HasEvents"))
