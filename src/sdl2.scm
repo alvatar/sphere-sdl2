@@ -162,6 +162,32 @@
  SDL_HINT_OVERRIDE
  )
 
+(define SDL_HINT_ACCELEROMETER_AS_JOYSTICK "SDL_ACCELEROMETER_AS_JOYSTICK")
+(define SDL_HINT_FRAMEBUFFER_ACCELERATION "SDL_FRAMEBUFFER_ACCELERATION")
+(define SDL_HINT_GAMECONTROLLERCONFIG "SDL_GAMECONTROLLERCONFIG")
+(define SDL_HINT_GRAB_KEYBOARD "SDL_GRAB_KEYBOARD")
+(define SDL_HINT_IDLE_TIMER_DISABLED "SDL_IDLE_TIMER_DISABLED")
+(define SDL_HINT_JOYSTICK_ALLOW_BACKGROUND_EVENTS "SDL_JOYSTICK_ALLOW_BACKGROUND_EVENTS")
+(define SDL_HINT_MAC_CTRL_CLICK_EMULATE_RIGHT_CLICK "SDL_MAC_CTRL_CLICK_EMULATE_RIGHT_CLICK")
+(define SDL_HINT_MOUSE_RELATIVE_MODE_WARP "SDL_MOUSE_RELATIVE_MODE_WARP")
+(define SDL_HINT_ORIENTATIONS "SDL_ORIENTATIONS")
+(define SDL_HINT_RENDER_DIRECT3D_THREADSAFE "SDL_RENDER_DIRECT3D_THREADSAFE")
+(define SDL_HINT_RENDER_DRIVER "SDL_RENDER_DRIVER")
+(define SDL_HINT_RENDER_OPENGL_SHADERS "SDL_RENDER_OPENGL_SHADERS")
+(define SDL_HINT_RENDER_SCALE_QUALITY "SDL_RENDER_SCALE_QUALITY")
+(define SDL_HINT_RENDER_VSYNC "SDL_RENDER_VSYNC")
+(define SDL_HINT_TIMER_RESOLUTION "SDL_TIMER_RESOLUTION")
+(define SDL_HINT_VIDEO_ALLOW_SCREENSAVER "SDL_VIDEO_ALLOW_SCREENSAVER")
+(define SDL_HINT_VIDEO_HIGHDPI_DISABLED "SDL_VIDEO_HIGHDPI_DISABLED")
+(define SDL_HINT_VIDEO_MAC_FULLSCREEN_SPACES "SDL_VIDEO_MAC_FULLSCREEN_SPACES")
+(define SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS "SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS")
+(define SDL_HINT_VIDEO_WINDOW_SHARE_PIXEL_FORMAT "SDL_VIDEO_WINDOW_SHARE_PIXEL_FORMAT")
+(define SDL_HINT_VIDEO_WIN_D3DCOMPILER "SDL_VIDEO_WIN_D3DCOMPILER")
+(define SDL_HINT_VIDEO_X11_XINERAMA "SDL_VIDEO_X11_XINERAMA")
+(define SDL_HINT_VIDEO_X11_XRANDR "SDL_VIDEO_X11_XRANDR")
+(define SDL_HINT_VIDEO_X11_XVIDMODE "SDL_VIDEO_X11_XVIDMODE")
+(define SDL_HINT_XINPUT_ENABLED "SDL_XINPUT_ENABLED")
+
 (c-define-constants
  SDLK_UNKNOWN
  SDLK_RETURN
@@ -1191,7 +1217,7 @@
 
 (c-define-struct SDL_Palette
                  (ncolors int)
-                 (colors SDL_Color*))
+                 (colors (struct-array SDL_Color)))
 
 (c-define-struct SDL_PixelFormat
                  (format unsigned-int32)
@@ -1252,7 +1278,7 @@
                  (type unsigned-int32)
                  (timestamp unsigned-int32)
                  (windowID unsigned-int32)
-                 (text (array char))
+                 (text (array char)) ;; a 32 elements fixed-size array
                  (start int32)
                  (length int32))
 
@@ -1260,7 +1286,7 @@
                  (type unsigned-int32)
                  (timestamp unsigned-int32)
                  (windowID unsigned-int32)
-                 (text (array char)))
+                 (text (array char))) ;; a 32 elements fixed-size array
 
 (c-define-struct SDL_TouchFingerEvent
                  (type unsigned-int32)
@@ -1421,6 +1447,7 @@
 (define SDL_GL_GetSwapInterval (c-lambda () int "SDL_GL_GetSwapInterval"))
 (define SDL_GL_LoadLibrary (c-lambda (nonnull-char-string) int "SDL_GL_LoadLibrary"))
 (define SDL_GL_MakeCurrent (c-lambda (SDL_Window* SDL_GLContext) int "SDL_GL_MakeCurrent"))
+(define SDL_GL_ResetAttributes (c-lambda () void "SDL_GL_ResetAttributes"))
 (define SDL_GL_SetAttribute (c-lambda (SDL_GLattr int) int "SDL_GL_SetAttribute"))
 (define SDL_GL_SetSwapInterval (c-lambda (int) int "SDL_GL_SetSwapInterval"))
 (define SDL_GL_SwapWindow (c-lambda (SDL_Window*) void "SDL_GL_SwapWindow"))
@@ -1430,6 +1457,7 @@
  (sdl:game-controller
   (define SDL_GameControllerAddMapping (c-lambda (nonnull-char-string) int "SDL_GameControllerAddMapping"))
   (define SDL_GameControllerAddMappingsFromFile (c-lambda (nonnull-char-string) int "SDL_GameControllerAddMappingsFromFile"))
+  (define SDL_GameControllerAddMappingsFromRW (c-lambda (SDL_RWops* int) int "SDL_GameControllerAddMappingsFromRW"))
   (define SDL_GameControllerClose (c-lambda (SDL_GameController*) void "SDL_GameControllerClose"))
   (define SDL_GameControllerEventState (c-lambda (int) int "SDL_GameControllerEventState"))
   (define SDL_GameControllerGetAttached (c-lambda (SDL_GameController*) SDL_bool "SDL_GameControllerGetAttached"))
@@ -1472,6 +1500,10 @@
 (define SDL_GetCurrentVideoDriver (c-lambda () nonnull-char-string "SDL_GetCurrentVideoDriver"))
 (define SDL_GetCursor (c-lambda () SDL_Cursor* "SDL_GetCursor"))
 (define SDL_GetDefaultCursor (c-lambda () SDL_Cursor* "SDL_GetDefaultCursor"))
+(cond-expand
+ (sdl:assert
+  (define SDL_GetDefaultAssertionHandler (c-lambda () SDL_AssertionHandler "SDL_GetDefaultAssertionHandler")))
+ (else #!void))
 (define SDL_GetDesktopDisplayMode (c-lambda (int SDL_DisplayMode*) int "SDL_GetDesktopDisplayMode"))
 (define SDL_GetDisplayBounds (c-lambda (int SDL_Rect*) int "SDL_GetDisplayBounds"))
 (define SDL_GetDisplayMode (c-lambda (int int SDL_DisplayMode*) int "SDL_GetDisplayMode"))
