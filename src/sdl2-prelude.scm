@@ -132,7 +132,7 @@ end-of-string
 ;;(c-define-type* (struct SDL_atomic_t))
 (c-define-type* (struct SDL_version))
 
-(c-define-type SDL_EventFilter (function (void* SDL_Event) int))
+(c-define-type SDL_EventFilter (function (void* SDL_Event*) int))
 (c-define-type SDL_EventFilter* (pointer SDL_EventFilter))
 (c-define-type SDL_HintCallback (function (void* nonnull-char-string nonnull-char-string nonnull-char-string) void))
 (c-define-type SDL_LogOutputFunction (function (void* int SDL_LogPriority nonnull-char-string) void))
