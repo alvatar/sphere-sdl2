@@ -18,7 +18,7 @@
   (for-each (lambda (m) (sake#make-module-available m versions: '(() (debug)))) modules))
 
 (define-task install ()
-  (sake#install-sphere-to-system))
+  (sake#install-sphere-to-system extra-directories: '("deps")))
 
 (define-task test ()
   (sake#test-all))
