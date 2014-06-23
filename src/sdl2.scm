@@ -935,7 +935,7 @@
                  (src_format SDL_AudioFormat)
                  (dst_format SDL_AudioFormat)
                  (rate_incr double)
-                 (buf unsigned-int8)
+                 (buf unsigned-int8*)
                  (len int)
                  (len_cvt int)
                  (len_mult int)
@@ -1410,10 +1410,16 @@
 (define SDL_DelEventWatch (c-lambda (SDL_EventFilter void*) void "SDL_DelEventWatch"))
 (define SDL_DelHintCallback (c-lambda (nonnull-char-string SDL_HintCallback void*) void "SDL_DelHintCallback"))
 (define SDL_Delay (c-lambda (unsigned-int32) void "SDL_Delay"))
-(define SDL_DestroyCond (c-lambda (SDL_cond*) void "SDL_DestroyCond"))
-(define SDL_DestroyMutex (c-lambda (SDL_mutex*) void "SDL_DestroyMutex"))
+(cond-expand
+ (sdl:threads
+  (define SDL_DestroyCond (c-lambda (SDL_cond*) void "SDL_DestroyCond"))
+  (define SDL_DestroyMutex (c-lambda (SDL_mutex*) void "SDL_DestroyMutex")))
+ (else #!void))
 (define SDL_DestroyRenderer (c-lambda (SDL_Renderer*) void "SDL_DestroyRenderer"))
-(define SDL_DestroySemaphore (c-lambda (SDL_sem*) void "SDL_DestroySemaphore"))
+(cond-expand
+ (sdl:threads
+  (define SDL_DestroySemaphore (c-lambda (SDL_sem*) void "SDL_DestroySemaphore")))
+ (else #!void))
 (define SDL_DestroyTexture (c-lambda (SDL_Texture*) void "SDL_DestroyTexture"))
 (define SDL_DestroyWindow (c-lambda (SDL_Window*) void "SDL_DestroyWindow"))
 (cond-expand
