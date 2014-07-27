@@ -1643,6 +1643,11 @@
 (define SDL_IntersectRect (c-lambda (SDL_Rect* SDL_Rect* SDL_Rect*) SDL_bool "SDL_IntersectRect"))
 (define SDL_IntersectRectAndLine (c-lambda (SDL_Rect* int* int* int* int*) SDL_bool "SDL_IntersectRectAndLine"))
 (cond-expand
+ (ios
+  (define SDL_iPhoneSetAnimationCallback
+    (c-lambda (SDL_Window* int (function (void*) void*) void*) int "SDL_iPhoneSetAnimationCallback")))
+ (else #!void))
+(cond-expand
  (sdl:game-controller
   (define SDL_IsGameController (c-lambda (int) SDL_bool "SDL_IsGameController")))
  (else #!void))
@@ -1890,9 +1895,10 @@
 (define SDL_WriteLE32 (c-lambda (SDL_RWops* unsigned-int32) size-t "SDL_WriteLE32"))
 (define SDL_WriteLE64 (c-lambda (SDL_RWops* unsigned-int64) size-t "SDL_WriteLE64"))
 
-
 ;;-------------------------------------------------------------------------------
 ;; Helpers and Extensions
+
+;;!! SDL Events Filter
 
 ;; Default SDL Events Filter
 (define *current-sdl-events-filter*
@@ -1909,6 +1915,23 @@
 
 ;; C function serving as a proxy for Event Filters in Scheme
 (c-define (*sdl-events-filter-proxy* userdata event)
-          (void* SDL_Event*) int "SDL_default_events_handler" ""
+          (void* SDL_Event*) int "SDL_events_filter_proxy" ""
           (*current-sdl-events-filter* userdata event))
+
+;;!! SDL iOS Animation callback
+
+;; Default SDL iOS animation callback
+(define *current-sdl-ios-animation-callback*
+  (let ((once #f))
+    (lambda (params)
+      (unless once (SDL_Log "SDL Animation Callback is not set") (set! once #t)))))
+
+;; Set a new Event Filter
+(define (sdl-ios-animation-callback-set! proc)
+  (set! *current-sdl-ios-animation-callback* proc))
+
+;; C function serving as a proxy for Event Filters in Scheme
+(c-define (*sdl-ios-animation-callback-proxy* params)
+          (void*) void "SDL_ios_animation_callback_proxy" ""
+          (*current-sdl-ios-animation-callback* params))
 
