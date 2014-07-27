@@ -1889,3 +1889,26 @@
 (define SDL_WriteLE16 (c-lambda (SDL_RWops* unsigned-int16) size-t "SDL_WriteLE16"))
 (define SDL_WriteLE32 (c-lambda (SDL_RWops* unsigned-int32) size-t "SDL_WriteLE32"))
 (define SDL_WriteLE64 (c-lambda (SDL_RWops* unsigned-int64) size-t "SDL_WriteLE64"))
+
+
+;;-------------------------------------------------------------------------------
+;; Helpers and Extensions
+
+;; Default SDL Events Filter
+(define *current-sdl-events-filter*
+  (lambda (userdata event)
+    ;; In iOS is highly recommended to use an Events Filter, thus we le the user know
+    (cond-expand
+     (ios (SDL_Log "SDL Events Filter is not set"))
+     (else #!void))
+    1))
+
+;; Set a new Event Filter
+(define (sdl-events-filter-set! proc)
+  (set! *current-sdl-events-filter* proc))
+
+;; C function serving as a proxy for Event Filters in Scheme
+(c-define (*sdl-events-filter-proxy* userdata event)
+          (void* SDL_Event*) int "SDL_default_events_handler" ""
+          (*current-sdl-events-filter* userdata event))
+
