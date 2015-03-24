@@ -1,6 +1,9 @@
-;;; Copyright (c) 2013-2014 by Álvaro Castro Castilla. All Rights Reserved.
-;;; SDL2 Foreign Function Interface
+;;!!! SDL2 Foreign Function Interface
+;; .author Alvaro Castro-Castilla, 2015
 
+(include (spheres/gambit/ffi ffi-simple))
+(include (spheres/gambit/ffi types))
+(include "sdl2-prelude.scm")
 
 (c-define-constants
  SDL_INIT_TIMER
@@ -1903,7 +1906,7 @@
 ;; Default SDL Events Filter
 (define *current-sdl-events-filter*
   (lambda (userdata event)
-    ;; In iOS is highly recommended to use an Events Filter, thus we le the user know
+    ;; In iOS is highly recommended to use an Events Filter, thus we let the user know
     (cond-expand
      (ios (SDL_Log "SDL Events Filter is not set"))
      (else #!void))
@@ -1922,9 +1925,11 @@
 
 ;; Default SDL iOS animation callback
 (define *current-sdl-ios-animation-callback*
-  (let ((once #f))
+  (let ((once #t))
     (lambda (params)
-      (unless once (SDL_Log "SDL Animation Callback is not set") (set! once #t)))))
+      (if once
+          (begin (SDL_Log "SDL Animation Callback is not set")
+                 (set! once #f))))))
 
 ;; Set a new Event Filter
 (define (sdl-ios-animation-callback-set! proc)
