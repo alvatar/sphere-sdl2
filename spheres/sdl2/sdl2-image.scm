@@ -1,5 +1,9 @@
-;;; Copyright (c) 2013 by Álvaro Castro Castilla. All Rights Reserved.
-;;; SDL_Image2 Foreign Function Interface
+;;!!! SDL_Image2 Foreign Function Interface
+;; .author Alvaro Castro-Castilla, 2013-2015
+
+(include (spheres/gambit/ffi ffi-simple))
+(include (spheres/gambit/ffi types))
+(include "sdl2-prelude.scm")
 
 (c-declare "#include \"SDL_image.h\"")
 
