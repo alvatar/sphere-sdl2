@@ -2,3 +2,4 @@
 build
 lib
 ext
+.DS_Store
