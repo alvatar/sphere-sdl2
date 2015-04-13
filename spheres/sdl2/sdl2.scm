@@ -957,7 +957,8 @@
 (c-define-struct SDL_Color
                  (r unsigned-int8)
                  (g unsigned-int8)
-                 (b unsigned-int8))
+                 (b unsigned-int8)
+                 (a unsigned-int8))
 
 (cond-expand
  (sdl:game-controller
