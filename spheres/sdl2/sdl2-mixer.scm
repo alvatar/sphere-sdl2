@@ -1,8 +1,8 @@
 ;;!!! SDL_Image2 Foreign Function Interface
 ;; .author Alvaro Castro-Castilla, 2013-2015
 
-(include (spheres/gambit/ffi ffi-simple))
-(include (spheres/gambit/ffi types))
+(include (spheres/gambit/ffi c-define-base-macros#))
+(include (spheres/gambit/ffi types#))
 (include "sdl2-prelude.scm")
 
 (c-declare "#include \"SDL_mixer.h\"")
