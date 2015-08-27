@@ -7,7 +7,7 @@
         (ssrun#compile-library
          lib
          cond-expand-features: '(debug)
-         cc-options: "-I../../deps/SDL2-2.0.3/include/ -w"
+         cc-options: "-I/usr/include/SDL2/ -w"
          ld-options: "-lSDL2")))
     ((spheres/sdl2 sdl2-image)
      .
@@ -15,7 +15,7 @@
         (ssrun#compile-library
          lib
          cond-expand-features: '(debug)
-         cc-options: "-I../../deps/SDL2-2.0.3/include/ -I../../deps/SDL2_image-2.0.0 -w"
+         cc-options: "-I/usr/include/SDL2/ -w"
          ld-options: "-lSDL2 -lSDL2_image")))
     ((spheres/sdl2 sdl2-mixer)
      .
@@ -23,7 +23,7 @@
         (ssrun#compile-library
          lib
          cond-expand-features: '(debug)
-         cc-options: "-I../../deps/SDL2-2.0.3/include/ -I../../deps/SDL2_mixer-2.0.0 -w"
+         cc-options: "-I/usr/include/SDL2/ -w"
          ld-options: "-lSDL2 -lSDL2_mixer")))
     ((spheres/sdl2 sdl2-ttf)
      .
@@ -31,7 +31,7 @@
         (ssrun#compile-library
          lib
          cond-expand-features: '(debug)
-         cc-options: "-I../../deps/SDL2-2.0.3/include/ -I../../deps/SDL2_ttf-2.0.12 -w"
+         cc-options: "-I/usr/include/SDL2 -w"
          ld-options: "-lSDL2 -lSDL2_ttf")))))
 
 (define-task (compile library) ()
