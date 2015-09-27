@@ -2,6 +2,7 @@
 ;; .author Alvaro Castro-Castilla, 2013-2015
 
 (include (spheres/gambit/ffi c-define-base-macros#))
+(include (spheres/gambit/ffi c-define-struct#))
 (include (spheres/gambit/ffi types#))
 (include "sdl2-prelude.scm")
 
