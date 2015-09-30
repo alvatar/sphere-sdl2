@@ -51,7 +51,7 @@
          ld-options:  (string-append (sdl2-config-ld) " " "-lSDL2_ttf"))))))
 
 (define-task (compile library) ()
-  (define (sdl-error . dummy)
+  (define (sdl-error . _)
     (println "Please make sure SDL2 is properly installed (version >= 2.0.0) - Sphere SDL2 relies on sdl2-config for compilation")
     (exit 1))
   (let* ((version-str
